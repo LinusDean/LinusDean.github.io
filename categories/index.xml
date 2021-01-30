@@ -5,6 +5,25 @@
     <link>https://treeboylife.com/categories/</link>
     <description>Recent content in Categories on TreeBoyLife</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Fri, 29 Jan 2021 22:30:51 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021</title>
+      <link>https://treeboylife.com/categories/2021/</link>
+      <pubDate>Fri, 29 Jan 2021 22:30:51 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/categories/2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life</title>
+      <link>https://treeboylife.com/categories/life/</link>
+      <pubDate>Fri, 29 Jan 2021 22:30:51 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/categories/life/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
