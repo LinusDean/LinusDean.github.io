@@ -6,7 +6,19 @@
     <description>Recent content on TreeBoyLife</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Jan 2021 22:30:51 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 10:02:46 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Virtual Functions in Cpp</title>
+      <link>https://treeboylife.com/blog/virtual-functions-in-cpp/</link>
+      <pubDate>Sun, 28 Feb 2021 10:02:46 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blog/virtual-functions-in-cpp/</guid>
+      <description>What is virtual function? A virtual function is a member function in the base class that we expect to redefine in derived classes.
+Basically a virtual function is used in the base class in order to ensure that the function is overriden.
+This especially applies to cases where a pointer of base class points to an object of a derived class.
+Here is a basic example which demonstrates how virtual function works.</description>
+    </item>
+    
     <item>
       <title>Migrating Blog to Github Pages</title>
       <link>https://treeboylife.com/blog/migrate-blog-to-github-pages/</link>
