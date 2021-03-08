@@ -14,7 +14,7 @@
   
 
   
-  <title>TreeBoyLife</title>
+  <title>Ipopt Build</title>
 
   
   
@@ -31,9 +31,9 @@
   <link href="https://treeboylife.com/favicon.png" rel="icon">
 
   
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="TreeBoyLife" />
+  
 
-  <meta name="description" content="Blog about tech and life" />
+  <meta name="description" content="" />
   <meta name="keywords" content="">
   <meta name="author" content="TreeBoy">
 
@@ -109,16 +109,11 @@
 </nav>
 
 
-
-
-  
-
 <div id="main">
   <div id="content">
-    <div class="blog-index">
-      
-      
-      <article>
+    <div>
+      <article class="hentry" role="article">
+
         
         
 
@@ -137,89 +132,102 @@
   </h1>
 </header>
 
-        
-          <p>What is Ipopt Ipopt (Interior Point Optimizer) is an open source software package for large-scale nonlinear optimization. You can find the official documentation HERE.
-How to Buid It The Ipopt relies some dependencies. Make sure install them first.
- LAPACK (Linear Algebra Package) HSL (Harwell Subroutines Library) ThirdParty-HSL  Compile And Install LAPACK First we need to download the source code and compile to dynamic shared library.
-wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz The LAPACK is compiled to static library by default with unmodified rule, we need to change the 45th line of CMakeLists.</p>
+
+        <div class="entry-content">
           
-            <footer>
-              <a href="https://treeboylife.com/blog/ipopt-build/" rel="full-article">Would you like to know more? →</a>
-            </footer>
           
-        
-      </article>
-      
-      <article>
-        
+          
+          <h1 id="what-is-ipopt">What is Ipopt</h1>
+<p>Ipopt (Interior Point Optimizer) is an open source software package for large-scale
+nonlinear optimization. You can find the official documentation <a href="https://coin-or.github.io/Ipopt/index.html">HERE.</a></p>
+<h2 id="how-to-buid-it">How to Buid It</h2>
+<p>The Ipopt relies some dependencies. Make sure install them first.</p>
+<ul>
+<li><a href="https://github.com/Reference-LAPACK/lapack">LAPACK</a> (Linear Algebra Package)</li>
+<li>HSL (Harwell Subroutines Library)</li>
+<li>ThirdParty-HSL</li>
+</ul>
+<h3 id="compile-and-install-lapack">Compile And Install LAPACK</h3>
+<p>First we need to download the source code and compile to dynamic shared library.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz
+</code></pre></div><p>The LAPACK is compiled to static library by default with unmodified rule, we need to change the 45th line of <strong>CMakeLists.txt</strong> file.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">option(BUILD_SHARED_LIBS <span style="color:#2aa198">&#34;Build shared libraries&#34;</span> ON)
+</code></pre></div><p>Make build directory and we are good to go.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir build <span style="color:#719e07">&amp;&amp;</span> <span style="color:#b58900">cd</span> build
+cmake ../
+make
+make install
+</code></pre></div><h3 id="compile-hsl">Compile HSL</h3>
+<p>There are two versions of HSL available:</p>
+<ul>
+<li>HSL Archive (freely available for personal commercial or non-commercial usage)</li>
+<li>HSL Full (Academic use only)</li>
+</ul>
+<p>To obtain the HSL code, you can follow the instructions <a href="https://coin-or.github.io/Ipopt/INSTALL.html#DOWNLOAD_HSL">here.</a>  To compile the HSL code via the COIN-OR Tools project ThirdParty-HSL.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or-tools/ThirdParty-HSL.git
+<span style="color:#b58900">cd</span> ThirdParty-HSL
+./configure
+make
+sudo make install
+</code></pre></div><h3 id="compile-ipopt">Compile Ipopt</h3>
+<p>If all the dependencies were correctly installed and default path <strong>/usr/local/lib64</strong> was added to the <strong>LD_LIBRARY_PATH</strong> the Ipopt was very easy to compile. Just clone the project and create a build directory, config it then make.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or/Ipopt
+<span style="color:#b58900">cd</span> Ipopt <span style="color:#719e07">&amp;&amp;</span> mkdir build
+../configure
+make
+</code></pre></div><p>After compiling the whole code, make sure executing <code>make test</code> to check if the Ipopt were working properly.</p>
+
+        </div>
         
 
-<header>
-  <p class="meta">Feb 28, 2021
-     - 1 minute read 
-     - <a href="https://treeboylife.com/blog/virtual-functions-in-cpp/#disqus_thread">Comments</a>
-
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">TreeBoy</span></span>
     
+    <time>Mar 8, 2021</time>
     
-      - <a class="label" href="https://treeboylife.com/categories/c&#43;&#43;/">C&#43;&#43; </a>
+      <span class="categories">
+        Tags:
+        
+          <a class="category" href="https://treeboylife.com/tags/ipopt">Ipopt</a>  
     
+    </span>
   </p>
-  <h1 class="entry-title">
-    <a href="https://treeboylife.com/blog/virtual-functions-in-cpp/">Virtual Functions in Cpp</a>
-  </h1>
-</header>
-
-        
-          <p>What is virtual function? A virtual function is a member function in the base class that we expect to redefine in derived classes.
-Basically a virtual function is used in the base class in order to ensure that the function is overriden.
-This especially applies to cases where a pointer of base class points to an object of a derived class.
-Here is a basic example which demonstrates how virtual function works.</p>
-          
-            <footer>
-              <a href="https://treeboylife.com/blog/virtual-functions-in-cpp/" rel="full-article">Would you like to know more? →</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-  <p class="meta">Jan 29, 2021
-     - 1 minute read 
-     - <a href="https://treeboylife.com/blog/migrate-blog-to-github-pages/#disqus_thread">Comments</a>
-
-    
-    
-      - <a class="label" href="https://treeboylife.com/categories/life/">Life </a><a class="label" href="https://treeboylife.com/categories/2021/">2021 </a>
-    
-  </p>
-  <h1 class="entry-title">
-    <a href="https://treeboylife.com/blog/migrate-blog-to-github-pages/">Migrating Blog to Github Pages</a>
-  </h1>
-</header>
-
-        
-          <p></p>
-          
-            <footer>
-              <a href="https://treeboylife.com/blog/migrate-blog-to-github-pages/" rel="full-article">Would you like to know more? →</a>
-            </footer>
-          
-        
-      </article>
-      
-      
-      
-
-
-
-
-
 
   
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://treeboylife.com/blog/virtual-functions-in-cpp/" title="Virtual Functions in Cpp">Virtual Functions in Cpp</a>
+    
+
+    
+  </p>
+  
+    
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+      
+      
+      
+      if (window.location.hostname == "localhost")
+          return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'treeboylife.com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+  
+</footer>
+
+      </article>
     </div>
     
 
@@ -308,9 +316,10 @@ I like reading and coding and i will share a lot about my life on this site. : )
     
   
 </aside>
-    
+
   </div>
 </div>
+
     <footer role="contentinfo">
       <p>Copyright &copy; 2021 TreeBoy - <a href="https://treeboylife.com/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
@@ -324,5 +333,4 @@ I like reading and coding and i will share a lot about my life on this site. : )
     
   </body>
 </html>
-   
 
