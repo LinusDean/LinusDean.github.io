@@ -14,7 +14,7 @@
   
 
   
-  <title>Virtual Functions in Cpp</title>
+  <title>Leetcode_easy_twosum</title>
 
   
   
@@ -112,17 +112,17 @@
         
 
 <header>
-  <p class="meta">Feb 28, 2021
+  <p class="meta">Apr 17, 2021
      - 1 minute read 
-     - <a href="https://treeboylife.com/blog/virtual-functions-in-cpp/#disqus_thread">Comments</a>
+     - <a href="https://treeboylife.com/blog/leetcode_easy_twosum/#disqus_thread">Comments</a>
 
     
     
-      - <a class="label" href="https://treeboylife.com/categories/c&#43;&#43;/">C&#43;&#43; </a>
+      - <a class="label" href="https://treeboylife.com/categories/leetcode/">leetcode </a>
     
   </p>
   <h1 class="entry-title">
-     Virtual Functions in Cpp 
+    <a href="https://treeboylife.com/blog/leetcode_easy_twosum/">Leetcode_easy_twosum</a>
   </h1>
 </header>
 
@@ -131,52 +131,51 @@
           
           
           
-          <h1 id="what-is-virtual-function">What is virtual function?</h1>
-<p>A virtual function is a member function in the base class that we expect to redefine in derived classes.<br>
-Basically a virtual function is used in the base class in order to ensure that the function is <strong>overriden</strong>.<br>
-This especially applies to cases where a pointer of base class points to an object of a derived class.<br>
-Here is a basic example which demonstrates how virtual function works.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#719e07">#include</span> <span style="color:#719e07">&lt;iostream&gt;</span><span style="color:#719e07">
-</span><span style="color:#719e07">#include</span> <span style="color:#719e07">&lt;string&gt;</span><span style="color:#719e07">
-</span><span style="color:#719e07"></span>
-<span style="color:#719e07">class</span> <span style="color:#268bd2">Entity</span> 
-{
+          <h1 id="two-sum">Two Sum</h1>
+<p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
+<h1 id="solution">Solution</h1>
+<h2 id="brute-force">brute-force</h2>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#719e07">class</span> <span style="color:#268bd2">Solution</span> {
 <span style="color:#719e07">public</span><span style="color:#719e07">:</span>
-    <span style="color:#719e07">virtual</span> std<span style="color:#719e07">::</span>string GetName() { <span style="color:#719e07">return</span> <span style="color:#2aa198">&#34;Entity&#34;</span>; }
+    vector<span style="color:#719e07">&lt;</span><span style="color:#dc322f">int</span><span style="color:#719e07">&gt;</span> twoSum(vector<span style="color:#719e07">&lt;</span><span style="color:#dc322f">int</span><span style="color:#719e07">&gt;&amp;</span> nums, <span style="color:#dc322f">int</span> target) {
+        <span style="color:#719e07">for</span>(<span style="color:#dc322f">int</span> i<span style="color:#719e07">=</span><span style="color:#2aa198">0</span>; i <span style="color:#719e07">&lt;</span> nums.size(); <span style="color:#719e07">++</span>i)
+        {
+            <span style="color:#dc322f">int</span> left <span style="color:#719e07">=</span> target <span style="color:#719e07">-</span> nums[i];
+            <span style="color:#719e07">for</span>(<span style="color:#dc322f">int</span> j<span style="color:#719e07">=</span>i<span style="color:#719e07">+</span><span style="color:#2aa198">1</span>; j <span style="color:#719e07">&lt;</span> nums.size(); j<span style="color:#719e07">++</span>)
+            {
+                <span style="color:#719e07">if</span>(nums[j] <span style="color:#719e07">==</span> left)
+                {
+                    <span style="color:#719e07">return</span> {i, j};
+                }
+            }
+        }
+
+        <span style="color:#719e07">return</span> {};
+    }
 };
-
-<span style="color:#719e07">class</span> <span style="color:#268bd2">Person</span><span style="color:#719e07">:</span> <span style="color:#719e07">public</span> Entity
-{
-<span style="color:#719e07">private</span><span style="color:#719e07">:</span>
-    std<span style="color:#719e07">::</span>string m_Name;
-
+</code></pre></div><h2 id="hashmap">hashmap</h2>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#719e07">class</span> <span style="color:#268bd2">Solution</span> {
 <span style="color:#719e07">public</span><span style="color:#719e07">:</span>
-    Person(<span style="color:#719e07">const</span> std<span style="color:#719e07">::</span>string<span style="color:#719e07">&amp;</span> name) <span style="color:#719e07">:</span> m_Name(name) {}
-    std<span style="color:#719e07">::</span>string GetName() { <span style="color:#719e07">return</span> m_Name; }
-};
+    vector<span style="color:#719e07">&lt;</span><span style="color:#dc322f">int</span><span style="color:#719e07">&gt;</span> twoSum(vector<span style="color:#719e07">&lt;</span><span style="color:#dc322f">int</span><span style="color:#719e07">&gt;&amp;</span> nums, <span style="color:#dc322f">int</span> target) {
+        unordered_map<span style="color:#719e07">&lt;</span><span style="color:#dc322f">int</span>, <span style="color:#dc322f">int</span><span style="color:#719e07">&gt;</span> indices;
+        <span style="color:#719e07">for</span>(<span style="color:#dc322f">int</span> i<span style="color:#719e07">=</span><span style="color:#2aa198">0</span>; i <span style="color:#719e07">&lt;</span> nums.size(); <span style="color:#719e07">++</span>i )
+        {
+            indices[nums[i]] <span style="color:#719e07">=</span> i;
+        }
 
-<span style="color:#dc322f">void</span> <span style="color:#268bd2">print</span>(Entity<span style="color:#719e07">*</span> entity)
-{
-    std<span style="color:#719e07">::</span>cout <span style="color:#719e07">&lt;&lt;</span> entity<span style="color:#719e07">-&gt;</span>GetName() <span style="color:#719e07">&lt;&lt;</span> std<span style="color:#719e07">::</span>endl;
+        <span style="color:#719e07">for</span>(<span style="color:#dc322f">int</span> i<span style="color:#719e07">=</span><span style="color:#2aa198">0</span>; i <span style="color:#719e07">&lt;</span> nums.size(); <span style="color:#719e07">++</span>i)
+        {
+            <span style="color:#dc322f">int</span> left <span style="color:#719e07">=</span> target <span style="color:#719e07">-</span> nums[i];
+            <span style="color:#719e07">if</span>(indices.count(left) <span style="color:#719e07">&amp;&amp;</span> indices[left] <span style="color:#719e07">!=</span> i)
+            {
+                <span style="color:#719e07">return</span> {i, indices[left]};
+            }
+        }
+
+        <span style="color:#719e07">return</span> {};
+    }
 }
-
-<span style="color:#dc322f">int</span> <span style="color:#268bd2">main</span>()
-{
-    Entity<span style="color:#719e07">*</span> e <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Entity();
-    print(e);
-
-    Person<span style="color:#719e07">*</span> p <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Person(<span style="color:#2aa198">&#34;Jacky&#34;</span>);
-    print(p);
-
-    <span style="color:#719e07">delete</span> e;
-    <span style="color:#719e07">delete</span> p;
-    <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
-}
-
-<span style="color:#586e75">// OutPut:
-</span><span style="color:#586e75">// Entity
-</span><span style="color:#586e75">// Jacky
-</span></code></pre></div>
+</code></pre></div>
         </div>
         
 
@@ -184,12 +183,12 @@ Here is a basic example which demonstrates how virtual function works.</p>
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">TreeBoy</span></span>
     
-    <time>Feb 28, 2021</time>
+    <time>Apr 17, 2021</time>
     
       <span class="categories">
         Tags:
         
-          <a class="category" href="https://treeboylife.com/tags/c&#43;&#43;">C&#43;&#43;</a>  
+          <a class="category" href="https://treeboylife.com/tags/easy">easy</a>  
     
     </span>
   </p>
@@ -198,11 +197,9 @@ Here is a basic example which demonstrates how virtual function works.</p>
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://treeboylife.com/blog/migrate-blog-to-github-pages/" title="Migrating Blog to Github Pages">Migrating Blog to Github Pages</a>
+        <a class="basic-alignment left" href="https://treeboylife.com/blog/ipopt-build/" title="Ipopt Build">Ipopt Build</a>
     
 
-    
-      <a class="basic-alignment right" href="https://treeboylife.com/blog/ipopt-build/" title="Ipopt Build">Ipopt Build</a>
     
   </p>
   
