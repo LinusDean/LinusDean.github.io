@@ -14,7 +14,7 @@
   
 
   
-  <title>Ipopt Build</title>
+  <title>Stored Procedure Analysis</title>
 
   
   
@@ -112,17 +112,17 @@
         
 
 <header>
-  <p class="meta">Mar 8, 2021
-     - 2 minute read 
-     - <a href="https://treeboylife.com/blog/ipopt-build/#disqus_thread">Comments</a>
+  <p class="meta">Jul 16, 2021
+     - 1 minute read 
+     - <a href="https://treeboylife.com/blog/stored-procedure-analysis/#disqus_thread">Comments</a>
 
     
     
-      - <a class="label" href="https://treeboylife.com/categories/optimizer/">Optimizer </a>
+      - <a class="label" href="https://treeboylife.com/categories/ts/">TS </a><a class="label" href="https://treeboylife.com/categories/2021/">2021 </a>
     
   </p>
   <h1 class="entry-title">
-     Ipopt Build 
+    <a href="https://treeboylife.com/blog/stored-procedure-analysis/">Stored Procedure Analysis</a>
   </h1>
 </header>
 
@@ -131,46 +131,35 @@
           
           
           
-          <h1 id="what-is-ipopt">What is Ipopt</h1>
-<p>Ipopt (Interior Point Optimizer) is an open source software package for large-scale
-nonlinear optimization. You can find the official documentation <a href="https://coin-or.github.io/Ipopt/index.html">HERE.</a></p>
-<h2 id="how-to-buid-it">How to Buid It</h2>
-<p>The Ipopt relies some dependencies. Make sure install them first.</p>
-<ul>
-<li><a href="https://github.com/Reference-LAPACK/lapack">LAPACK</a> (Linear Algebra Package)</li>
-<li>HSL (Harwell Subroutines Library)</li>
-<li>ThirdParty-HSL</li>
-</ul>
-<h3 id="compile-and-install-lapack">Compile And Install LAPACK</h3>
-<p>First we need to download the source code and compile to dynamic shared library.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz
-</code></pre></div><p>The LAPACK is compiled to static library by default with unmodified rule, we need to change the 45th line of <strong>CMakeLists.txt</strong> file.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">option(BUILD_SHARED_LIBS <span style="color:#2aa198">&#34;Build shared libraries&#34;</span> ON)
-</code></pre></div><p>Make build directory and we are good to go.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir build <span style="color:#719e07">&amp;&amp;</span> <span style="color:#b58900">cd</span> build
-cmake ../
-make
-make install
-</code></pre></div><h3 id="compile-hsl">Compile HSL</h3>
-<p>There are two versions of HSL available:</p>
-<ul>
-<li>HSL Archive (freely available for personal commercial or non-commercial usage)</li>
-<li>HSL Full (Academic use only)</li>
-</ul>
-<p>To obtain the HSL code, you can follow the instructions <a href="https://coin-or.github.io/Ipopt/INSTALL.html#DOWNLOAD_HSL">here.</a>  To compile the HSL code via the COIN-OR Tools project ThirdParty-HSL.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or-tools/ThirdParty-HSL.git
-<span style="color:#b58900">cd</span> ThirdParty-HSL
-./configure
-make
-sudo make install
-</code></pre></div><h3 id="compile-ipopt">Compile Ipopt</h3>
-<p>If all the dependencies were correctly installed and default path <strong>/usr/local/lib64</strong> was added to the <strong>LD_LIBRARY_PATH</strong> the Ipopt was very easy to compile. Just clone the project and create a build directory, config it then make.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or/Ipopt
-<span style="color:#b58900">cd</span> Ipopt <span style="color:#719e07">&amp;&amp;</span> mkdir build
-../configure
-make
-</code></pre></div><p>After compiling the whole code, make sure executing <code>make test</code> to check if the Ipopt were working properly.</p>
+          <h1 id="记录一次存储过程耗时分析">记录一次存储过程耗时分析</h1>
+<p>公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中<br>
+在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此<br>
+我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。</p>
+<h2 id="主要思路">主要思路</h2>
+<p>调试语句的主要思路就是创建一个零时的表例如debugMsg</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#719e07">DROP</span> <span style="color:#719e07">TABLE</span> <span style="color:#719e07">IF</span> <span style="color:#719e07">EXISTS</span> <span style="color:#719e07">`</span>debugMsg<span style="color:#719e07">`</span>;
+<span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> <span style="color:#719e07">`</span>debugMsg<span style="color:#719e07">`</span> (
+  <span style="color:#719e07">`</span>msg<span style="color:#719e07">`</span> <span style="color:#b58900">varchar</span>(<span style="color:#2aa198">255</span>) <span style="color:#719e07">DEFAULT</span> <span style="color:#719e07">NULL</span>,
+  <span style="color:#719e07">`</span>datetime<span style="color:#719e07">`</span> <span style="color:#b58900">int</span>(<span style="color:#2aa198">8</span>) <span style="color:#719e07">DEFAULT</span> <span style="color:#719e07">NULL</span>
+) ENGINE<span style="color:#719e07">=</span>InnoDB <span style="color:#719e07">DEFAULT</span> CHARSET<span style="color:#719e07">=</span>utf8;
+</code></pre></div><p>在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#719e07">set</span> <span style="color:#719e07">@</span>debug_enable<span style="color:#719e07">=</span><span style="color:#719e07">FALSE</span>;
+<span style="color:#719e07">IF</span> <span style="color:#719e07">@</span>debug_enable <span style="color:#719e07">THEN</span>
+	<span style="color:#719e07">delete</span> <span style="color:#719e07">from</span> debugMsg;
+<span style="color:#719e07">END</span> <span style="color:#719e07">IF</span>;
 
+...
+
+<span style="color:#719e07">IF</span> <span style="color:#719e07">@</span>debug_enable <span style="color:#719e07">THEN</span>
+	<span style="color:#719e07">INSERT</span> <span style="color:#719e07">INTO</span> debugMsg(msg, datetime) <span style="color:#719e07">VALUES</span> (<span style="color:#2aa198">&#34;create case xxxxx....&#34;</span>, UNIX_TIMESTAMP());
+<span style="color:#719e07">END</span> <span style="color:#719e07">IF</span>;
+	业务代码部分
+
+
+<span style="color:#719e07">IF</span> <span style="color:#719e07">@</span>debug_enable <span style="color:#719e07">THEN</span>
+	<span style="color:#719e07">INSERT</span> <span style="color:#719e07">INTO</span> debugMsg(msg, datetime) <span style="color:#719e07">VALUES</span> (<span style="color:#2aa198">&#34;END create case xxxxx....&#34;</span>, UNIX_TIMESTAMP());
+<span style="color:#719e07">END</span> <span style="color:#719e07">IF</span>;
+</code></pre></div>
         </div>
         
 
@@ -178,12 +167,12 @@ make
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">TreeBoy</span></span>
     
-    <time>Mar 8, 2021</time>
+    <time>Jul 16, 2021</time>
     
       <span class="categories">
         Tags:
         
-          <a class="category" href="https://treeboylife.com/tags/ipopt">Ipopt</a>  
+          <a class="category" href="https://treeboylife.com/tags/ts">TS</a>  
     
     </span>
   </p>
@@ -192,33 +181,12 @@ make
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://treeboylife.com/blog/virtual-functions-in-cpp/" title="Virtual Functions in Cpp">Virtual Functions in Cpp</a>
+        <a class="basic-alignment left" href="https://treeboylife.com/blog/leetcode_easy_twosum/" title="Leetcode_easy_twosum">Leetcode_easy_twosum</a>
     
 
-    
-      <a class="basic-alignment right" href="https://treeboylife.com/blog/leetcode_easy_twosum/" title="Leetcode_easy_twosum">Leetcode_easy_twosum</a>
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
-      
-      
-      
-      if (window.location.hostname == "localhost")
-          return;
-
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'treeboylife.com';
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
     
   
 </footer>

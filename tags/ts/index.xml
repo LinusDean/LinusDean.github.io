@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2021 on TreeBoyLife</title>
-    <link>https://treeboylife.com/categories/2021/</link>
-    <description>Recent content in 2021 on TreeBoyLife</description>
+    <title>TS on TreeBoyLife</title>
+    <link>https://treeboylife.com/tags/ts/</link>
+    <description>Recent content in TS on TreeBoyLife</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Jul 2021 20:36:00 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/2021/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Jul 2021 20:36:00 +0800</lastBuildDate><atom:link href="https://treeboylife.com/tags/ts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Stored Procedure Analysis</title>
       <link>https://treeboylife.com/blog/stored-procedure-analysis/</link>
@@ -19,15 +19,6 @@
 主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg
 DROP TABLE IF EXISTS `debugMsg`; CREATE TABLE `debugMsg` ( `msg` varchar(255) DEFAULT NULL, `datetime` int(8) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
 set @debug_enable=FALSE; IF @debug_enable THEN delete from debugMsg; END IF; ... IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&amp;#34;create case xxxxx....&amp;#34;, UNIX_TIMESTAMP()); END IF; 业务代码部分 IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&amp;#34;END create case xxxxx....&amp;#34;, UNIX_TIMESTAMP()); END IF; </description>
-    </item>
-    
-    <item>
-      <title>Migrating Blog to Github Pages</title>
-      <link>https://treeboylife.com/blog/migrate-blog-to-github-pages/</link>
-      <pubDate>Fri, 29 Jan 2021 22:30:51 +0800</pubDate>
-      
-      <guid>https://treeboylife.com/blog/migrate-blog-to-github-pages/</guid>
-      <description></description>
     </item>
     
   </channel>

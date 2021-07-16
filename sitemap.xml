@@ -1,90 +1,65 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://treeboylife.com/blog/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/categories/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/tags/easy/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/categories/leetcode/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/blog/leetcode_easy_twosum/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/tags/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/</loc>
-    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/tags/ipopt/</loc>
-    <lastmod>2021-03-08T19:33:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/blog/ipopt-build/</loc>
-    <lastmod>2021-03-08T19:33:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/categories/optimizer/</loc>
-    <lastmod>2021-03-08T19:33:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/tags/c&#43;&#43;/</loc>
-    <lastmod>2021-02-28T10:02:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/categories/c&#43;&#43;/</loc>
-    <lastmod>2021-02-28T10:02:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://treeboylife.com/blog/virtual-functions-in-cpp/</loc>
-    <lastmod>2021-02-28T10:02:46+08:00</lastmod>
-  </url>
-  
   <url>
     <loc>https://treeboylife.com/categories/2021/</loc>
-    <lastmod>2021-01-29T22:30:51+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/stored-procedure-analysis/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/ts/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/ts/</loc>
+    <lastmod>2021-07-16T20:36:00+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/easy/</loc>
+    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/leetcode/</loc>
+    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/leetcode_easy_twosum/</loc>
+    <lastmod>2021-04-17T20:09:44+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/ipopt/</loc>
+    <lastmod>2021-03-08T19:33:30+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/ipopt-build/</loc>
+    <lastmod>2021-03-08T19:33:30+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/optimizer/</loc>
+    <lastmod>2021-03-08T19:33:30+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/c&#43;&#43;/</loc>
+    <lastmod>2021-02-28T10:02:46+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/c&#43;&#43;/</loc>
+    <lastmod>2021-02-28T10:02:46+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/virtual-functions-in-cpp/</loc>
+    <lastmod>2021-02-28T10:02:46+08:00</lastmod>
+  </url><url>
     <loc>https://treeboylife.com/tags/life/</loc>
     <lastmod>2021-01-29T22:30:51+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://treeboylife.com/categories/life/</loc>
     <lastmod>2021-01-29T22:30:51+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://treeboylife.com/blog/migrate-blog-to-github-pages/</loc>
     <lastmod>2021-01-29T22:30:51+08:00</lastmod>
   </url>
-  
 </urlset>

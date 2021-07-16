@@ -6,7 +6,21 @@
     <description>Recent content on TreeBoyLife</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Apr 2021 20:09:44 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Jul 2021 20:36:00 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stored Procedure Analysis</title>
+      <link>https://treeboylife.com/blog/stored-procedure-analysis/</link>
+      <pubDate>Fri, 16 Jul 2021 20:36:00 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blog/stored-procedure-analysis/</guid>
+      <description>记录一次存储过程耗时分析 公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中
+在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此
+我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。
+主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg
+DROP TABLE IF EXISTS `debugMsg`; CREATE TABLE `debugMsg` ( `msg` varchar(255) DEFAULT NULL, `datetime` int(8) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
+set @debug_enable=FALSE; IF @debug_enable THEN delete from debugMsg; END IF; ... IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&amp;#34;create case xxxxx....&amp;#34;, UNIX_TIMESTAMP()); END IF; 业务代码部分 IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&amp;#34;END create case xxxxx....&amp;#34;, UNIX_TIMESTAMP()); END IF; </description>
+    </item>
+    
     <item>
       <title>Leetcode_easy_twosum</title>
       <link>https://treeboylife.com/blog/leetcode_easy_twosum/</link>
