@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust on TreeBoyLife</title>
+    <link>https://treeboylife.com/categories/rust/</link>
+    <description>Recent content in Rust on TreeBoyLife</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 24 Jul 2021 20:09:54 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World Rust</title>
+      <link>https://treeboylife.com/blog/hello-world-rust/</link>
+      <pubDate>Sat, 24 Jul 2021 20:09:54 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blog/hello-world-rust/</guid>
+      <description>Hello World Rust 语言中最简单的一个Hello World程序
+fn main() { println!(&amp;#34;Hello Rust!&amp;#34;); } 在Rust中println!是一个宏(Marco)用于输出字符串
+rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</description>
+    </item>
+    
+  </channel>
+</rss>
