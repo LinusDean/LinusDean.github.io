@@ -14,7 +14,7 @@
   
 
   
-  <title>Hello World Rust</title>
+  <title>Iptables Port Forwarding Settings</title>
 
   
   
@@ -112,17 +112,17 @@
         
 
 <header>
-  <p class="meta">Jul 24, 2021
+  <p class="meta">Aug 2, 2021
      - 1 minute read 
-     - <a href="https://treeboylife.com/blog/hello-world-rust/#disqus_thread">Comments</a>
+     - <a href="https://treeboylife.com/blog/iptables-port-forwarding-settings/#disqus_thread">Comments</a>
 
     
     
-      - <a class="label" href="https://treeboylife.com/categories/2021/">2021 </a><a class="label" href="https://treeboylife.com/categories/rust/">Rust </a>
+      - <a class="label" href="https://treeboylife.com/categories/linux/">Linux </a>
     
   </p>
   <h1 class="entry-title">
-     Hello World Rust 
+    <a href="https://treeboylife.com/blog/iptables-port-forwarding-settings/">Iptables Port Forwarding Settings</a>
   </h1>
 </header>
 
@@ -131,13 +131,18 @@
           
           
           
-          <h1 id="hello-world">Hello World</h1>
-<p>Rust 语言中最简单的一个Hello World程序</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
-	println<span style="color:#719e07">!</span>(<span style="color:#2aa198">&#34;Hello Rust!&#34;</span>);
-}
-</code></pre></div><p>在Rust中println!是一个宏(Marco)用于输出字符串<br>
-rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</p>
+          <h1 id="linux-iptables转发">Linux iptables转发</h1>
+<p>最近在使用Apsara专有云，但是其安全组策略有一些限制，原本我们需要使用A机器访问C机器，可惜目前A机器因为安全组策略的原因无法正常访问，但凑巧的是目前有一台中转节点B，A可以访问B，B也可以访问C<br>
+于是我想起了之前Linux用iptables做端口转发的，这边简单记录一下</p>
+<h2 id="示意图">示意图</h2>
+<p>目前简单的网络架构是这样子的<br>
+<img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/ip-forwarding-network.png" alt="&ldquo;network&rdquo;">
+我们首先需要在服务器B上面开启端口转发功能，需要给sysctl.conf写入端口转发配置</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">net.ipv4.ip_forward<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>
+</code></pre></div><p>执行sysctl -p使其生效，最后配置iptables</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -t nat -A PREROUTING -p tcp --dport <span style="color:#2aa198">8080</span> -j DNAT --to-destination 1.1.1.1:8080
+iptables -t nat -A POSTROUTING -p tcp -d 1.1.1.1 --dport <span style="color:#2aa198">8080</span> -j SNAT --to-source 192.168.2.1 
+</code></pre></div><p>这样子我们就可以服务器A访问服务器B的8080端口实现访问服务器C的8080端口效果</p>
 
         </div>
         
@@ -146,12 +151,12 @@ rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc hellowo
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">TreeBoy</span></span>
     
-    <time>Jul 24, 2021</time>
+    <time>Aug 2, 2021</time>
     
       <span class="categories">
         Tags:
         
-          <a class="category" href="https://treeboylife.com/tags/rust">Rust</a>  
+          <a class="category" href="https://treeboylife.com/tags/linux">Linux</a>  
     
     </span>
   </p>
@@ -160,11 +165,9 @@ rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc hellowo
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://treeboylife.com/blog/stored-procedure-analysis/" title="Stored Procedure Analysis">Stored Procedure Analysis</a>
+        <a class="basic-alignment left" href="https://treeboylife.com/blog/comments-in-rust/" title="Comments in Rust">Comments in Rust</a>
     
 
-    
-      <a class="basic-alignment right" href="https://treeboylife.com/blog/comments-in-rust/" title="Comments in Rust">Comments in Rust</a>
     
   </p>
   

@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Dean&#39;s blog</title>
+    <title>Categories on TreeBoyLife</title>
     <link>https://treeboylife.com/categories/</link>
-    <description>Recent content in Categories on Dean&#39;s blog</description>
+    <description>Recent content in Categories on TreeBoyLife</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Jul 2021 20:20:45 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Aug 2021 12:35:18 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://treeboylife.com/categories/linux/</link>
+      <pubDate>Mon, 02 Aug 2021 12:35:18 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/categories/linux/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>2021</title>
       <link>https://treeboylife.com/categories/2021/</link>
