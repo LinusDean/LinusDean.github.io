@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rust on TreeBoyLife</title>
+    <title>Rust on Dean&#39;s blog</title>
     <link>https://treeboylife.com/categories/rust/</link>
-    <description>Recent content in Rust on TreeBoyLife</description>
+    <description>Recent content in Rust on Dean&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Jul 2021 20:09:54 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 20:20:45 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Comments in Rust</title>
+      <link>https://treeboylife.com/blog/comments-in-rust/</link>
+      <pubDate>Sat, 24 Jul 2021 20:20:45 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blog/comments-in-rust/</guid>
+      <description>Rust语言中的注释 任何语言都需要注释，Rust语言提供几个不同的注释方式
+ 普通的注释  // 一些注释 /* 块注释 */ # 下面是文档的注释，可以被parse到HTML的库文档中 /// 生成库文档 //! </description>
+    </item>
+    
     <item>
       <title>Hello World Rust</title>
       <link>https://treeboylife.com/blog/hello-world-rust/</link>
