@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
@@ -14,7 +17,7 @@
   
 
   
-  <title>Iptables Port Forwarding Settings</title>
+  <title>Docker</title>
 
   
   
@@ -31,7 +34,7 @@
   <link href="https://treeboylife.com/favicon.png" rel="icon">
 
   
-  
+  <link href="/tags/docker/index.xml" rel="alternate" type="application/rss+xml" title="Dean&#39;s Blog" />
 
   <meta name="description" content="" />
   <meta name="keywords" content="">
@@ -100,98 +103,47 @@
 <div id="main">
   <div id="content">
     <div>
-      <article class="hentry" role="article">
-
-        
-        
-
-<header>
-  <p class="meta">Aug 2, 2021
-     - 1 minute read 
-     - <a href="https://treeboylife.com/blog/iptables-port-forwarding-settings/#disqus_thread">Comments</a>
-
-    
-    
-      - <a class="label" href="https://treeboylife.com/categories/linux/">Linux </a>
-    
-  </p>
-  <h1 class="entry-title">
-     Iptables Port Forwarding Settings 
-  </h1>
-</header>
-
-
-        <div class="entry-content">
+      <article role="article">
+        <header>
+          <h1 class="entry-title">
+            Tag: Docker
+          </h1>
+        </header>
+        <div id="blog-archives" class="category">
           
-          
-          
-          <h1 id="linux-iptables转发">Linux iptables转发</h1>
-<p>最近在使用Apsara专有云，但是其安全组策略有一些限制，原本我们需要使用A机器访问C机器，可惜目前A机器因为安全组策略的原因无法正常访问，但凑巧的是目前有一台中转节点B，A可以访问B，B也可以访问C<br>
-于是我想起了之前Linux用iptables做端口转发的，这边简单记录一下</p>
-<h2 id="示意图">示意图</h2>
-<p>目前简单的网络架构是这样子的<br>
-<img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/ip-forwarding-network.png" alt="&ldquo;network&rdquo;">
-我们首先需要在服务器B上面开启端口转发功能，需要给sysctl.conf写入端口转发配置</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">net.ipv4.ip_forward<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>
-</code></pre></div><p>执行sysctl -p使其生效，最后配置iptables</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -t nat -A PREROUTING -p tcp --dport <span style="color:#2aa198">8080</span> -j DNAT --to-destination 1.1.1.1:8080
-iptables -t nat -A POSTROUTING -p tcp -d 1.1.1.1 --dport <span style="color:#2aa198">8080</span> -j SNAT --to-source 192.168.2.1 
-</code></pre></div><p>这样子我们就可以服务器A访问服务器B的8080端口实现访问服务器C的8080端口效果</p>
+          <h2>
+            2021
+          </h2>
+          <article>
+            <h1>
+              <a href="https://treeboylife.com/blog/use-systemd-in-docker-container/" title="Use Systemd in Docker Container">Use Systemd in Docker Container</a>
+            </h1>
+            <time>
+              <span class="month">Aug</span>
+              <span class="day">3</span>
+            </time>
+            <footer>
+              <span class="categories"> 
+                
+                
+                posted in:
+                 <a class="category" href="https://treeboylife.com/categories/linux">Linux</a>
+              </br>
+                
 
+                
+                
+                tags:
+                 <a class="category" href="https://treeboylife.com/tags/linux">Linux</a> <a class="category" href="https://treeboylife.com/tags/docker">Docker</a>
+                
+              </span>
+            </footer>
+          </article>
+          
         </div>
-        
-
-<footer>
-  <p class="meta">
-    <span class="byline author vcard">Posted by <span class="fn">Dean</span></span>
-    
-    <time>Aug 2, 2021</time>
-    
-      <span class="categories">
-        Tags:
-        
-          <a class="category" href="https://treeboylife.com/tags/linux">Linux</a>  
-    
-    </span>
-  </p>
-
-  
-
-  <p class="meta">
-    
-        <a class="basic-alignment left" href="https://treeboylife.com/blog/comments-in-rust/" title="Comments in Rust">Comments in Rust</a>
-    
-
-    
-      <a class="basic-alignment right" href="https://treeboylife.com/blog/use-systemd-in-docker-container/" title="Use Systemd in Docker Container">Use Systemd in Docker Container</a>
-    
-  </p>
-  
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
-      
-      
-      
-      if (window.location.hostname == "localhost")
-          return;
-
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'treeboylife.com';
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
-</footer>
-
       </article>
     </div>
+
     
 
 <aside class="sidebar thirds">

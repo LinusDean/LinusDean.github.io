@@ -111,6 +111,37 @@
         
 
 <header>
+  <p class="meta">Aug 3, 2021
+     - 1 minute read 
+     - <a href="https://treeboylife.com/blog/use-systemd-in-docker-container/#disqus_thread">Comments</a>
+
+    
+    
+      - <a class="label" href="https://treeboylife.com/categories/linux/">Linux </a>
+    
+  </p>
+  <h1 class="entry-title">
+    <a href="https://treeboylife.com/blog/use-systemd-in-docker-container/">Use Systemd in Docker Container</a>
+  </h1>
+</header>
+
+        
+          <p>Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。
+Solution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile
+FROMcentos:7 ENV container docker RUN yum -y install systemd; yum clean all; RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); RUN rm -rf /lib/systemd/system/multi-user.target.wants/; RUN rm -rf /etc/systemd/system/.wants/; RUN rm -rf /lib/systemd/system/local-fs.target.wants/; RUN rm -rf /lib/systemd/system/sockets.target.wants/udev; RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl; RUN rm -rf /lib/systemd/system/basic.target.wants/; RUN rm -rf /lib/systemd/system/anaconda.target.wants/*; VOLUME [ &#34;/sys/fs/cgroup&#34; ] RUN yum -y install gcc RUN yum -y install epel-release RUN yum -y install snapd CMD [&#34;/usr/sbin/init&#34;] 在Docker目录的同级目录下面执行docker build -t dev .</p>
+          
+            <footer>
+              <a href="https://treeboylife.com/blog/use-systemd-in-docker-container/" rel="full-article">Would you like to know more? →</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
   <p class="meta">Aug 2, 2021
      - 1 minute read 
      - <a href="https://treeboylife.com/blog/iptables-port-forwarding-settings/#disqus_thread">Comments</a>
@@ -244,38 +275,6 @@ Solution brute-force class Solution { public: vector&lt;int&gt; twoSum(vector&lt
           
             <footer>
               <a href="https://treeboylife.com/blog/leetcode_easy_twosum/" rel="full-article">Would you like to know more? →</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-  <p class="meta">Mar 8, 2021
-     - 2 minute read 
-     - <a href="https://treeboylife.com/blog/ipopt-build/#disqus_thread">Comments</a>
-
-    
-    
-      - <a class="label" href="https://treeboylife.com/categories/optimizer/">Optimizer </a>
-    
-  </p>
-  <h1 class="entry-title">
-    <a href="https://treeboylife.com/blog/ipopt-build/">Ipopt Build</a>
-  </h1>
-</header>
-
-        
-          <p>What is Ipopt Ipopt (Interior Point Optimizer) is an open source software package for large-scale nonlinear optimization. You can find the official documentation HERE.
-How to Buid It The Ipopt relies some dependencies. Make sure install them first.
- LAPACK (Linear Algebra Package) HSL (Harwell Subroutines Library) ThirdParty-HSL  Compile And Install LAPACK First we need to download the source code and compile to dynamic shared library.
-wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz The LAPACK is compiled to static library by default with unmodified rule, we need to change the 45th line of CMakeLists.</p>
-          
-            <footer>
-              <a href="https://treeboylife.com/blog/ipopt-build/" rel="full-article">Would you like to know more? →</a>
             </footer>
           
         
