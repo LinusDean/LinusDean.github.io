@@ -146,7 +146,7 @@
 <span style="color:#719e07">RUN</span> yum -y install snapd
 <span style="color:#719e07">CMD</span> [<span style="color:#2aa198">&#34;/usr/sbin/init&#34;</span>]
 </code></pre></div><p>在Docker目录的同级目录下面执行docker build -t dev .<br>
-我们在执行完之后去执行docker run -itd &ndash;name container01 &ndash;privileges=true dev /sbin/init 启动容器<br>
+我们在执行完之后去执行docker run -itd &ndash;name container01 &ndash;privileged=true dev /sbin/init 启动容器<br>
 使用docker exec -ti container01 bash进入容器的交互shell,执行systemctl status snapd如果没有报错那么恭喜你，成功地在容器下面使用了systemd,安装ccls可以参考下图中地命令
 <img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/systemd-in-docker-container.png" alt="&ldquo;systemd and ccls&rdquo;"></p>
 
