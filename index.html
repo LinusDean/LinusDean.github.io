@@ -111,6 +111,40 @@
         
 
 <header>
+  <p class="meta">Aug 15, 2021
+     - 1 minute read 
+     - <a href="https://treeboylife.com/blog/about-tmux-and-vim/#disqus_thread">Comments</a>
+
+    
+    
+      - <a class="label" href="https://treeboylife.com/categories/2021/">2021 </a><a class="label" href="https://treeboylife.com/categories/vim/">Vim </a><a class="label" href="https://treeboylife.com/categories/tmux/">Tmux </a>
+    
+  </p>
+  <h1 class="entry-title">
+    <a href="https://treeboylife.com/blog/about-tmux-and-vim/">About Tmux and Vim</a>
+  </h1>
+</header>
+
+        
+          <p>记录以下最近使用Tmux的一些设置和Vim的一些小技巧 tmux tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等
+创建一个Session 我们可以使用tmux new session -s mysessionName 来创建一个Session，我在我的环境变量里将其设置了一个aliasalias tnew=&quot;tmux new session -s&quot;,这样子就可以直接使用tnew mysession直接创建一个新的session，不用敲那么多命令
+挂起当前Session 挂起当前的这个session可以使用组合键Ctrl+b D(默认Control键加b然后按大写d)
+创建一个分屏  使用组合键Ctrl+b &quot;用来创建一个Horizontal的pane 使用组合键Ctrl+b %用来创建一个Vertical的pane  使用hjkl在不同的pane之间来回切换 这边我们需要修改以下tmux的配置文件 ~/.tmux.conf,这样子我们可以使用组合键Ctrl+b hjkl来回切换
+bind h select-pane -L bind j select-pane -D bind k select-pane -U bind l select-pane -R 使用hjkl对pane进行resize 在tmux的配置文件中加入以下配置
+# 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令 # 注意我们还是需要先按下Tmux的命令键 Ctrl+b bind -r ^k resizep -U 10 # 绑定Ctrl+k为往↑调整面板边缘10个单元格 bind -r ^j resizep -D 10 # 绑定Ctrl+j为往↓调整面板边缘10个单元格 bind -r ^h resizep -L 10 # 绑定Ctrl+h为往←调整面板边缘10个单元格 bind -r ^l resizep -R 10 # 绑定Ctrl+l为往→调整面板边缘10个单元格 Vim中的宏 昨天在处理一些文本需要一些批量化的工作去做，例如我需要将以下的文本删除最前的时间字符，后面的字符是特定格式的，于是我就想着要不要用vim的宏去处理一下</p>
+          
+            <footer>
+              <a href="https://treeboylife.com/blog/about-tmux-and-vim/" rel="full-article">Would you like to know more? →</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
   <p class="meta">Aug 3, 2021
      - 1 minute read 
      - <a href="https://treeboylife.com/blog/use-systemd-in-docker-container/#disqus_thread">Comments</a>
@@ -246,36 +280,6 @@ rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc hellowo
 主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg
 DROP TABLE IF EXISTS `debugMsg`; CREATE TABLE `debugMsg` ( `msg` varchar(255) DEFAULT NULL, `datetime` int(8) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
 set @debug_enable=FALSE; IF @debug_enable THEN delete from debugMsg; END IF; ... IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&#34;create case xxxxx....&#34;, UNIX_TIMESTAMP()); END IF; 业务代码部分 IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&#34;END create case xxxxx....&#34;, UNIX_TIMESTAMP()); END IF; </p>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-  <p class="meta">Apr 17, 2021
-     - 1 minute read 
-     - <a href="https://treeboylife.com/blog/leetcode_easy_twosum/#disqus_thread">Comments</a>
-
-    
-    
-      - <a class="label" href="https://treeboylife.com/categories/leetcode/">leetcode </a>
-    
-  </p>
-  <h1 class="entry-title">
-    <a href="https://treeboylife.com/blog/leetcode_easy_twosum/">Leetcode_easy_twosum</a>
-  </h1>
-</header>
-
-        
-          <p>Two Sum Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-Solution brute-force class Solution { public: vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) { for(int i=0; i &lt; nums.size(); ++i) { int left = target - nums[i]; for(int j=i+1; j &lt; nums.size(); j++) { if(nums[j] == left) { return {i, j}; } } } return {}; } }; hashmap class Solution { public: vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) { unordered_map&lt;int, int&gt; indices; for(int i=0; i &lt; nums.</p>
-          
-            <footer>
-              <a href="https://treeboylife.com/blog/leetcode_easy_twosum/" rel="full-article">Would you like to know more? →</a>
-            </footer>
           
         
       </article>
