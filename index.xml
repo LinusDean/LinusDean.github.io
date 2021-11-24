@@ -8,6 +8,16 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 15 Aug 2021 19:54:37 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Blogroll</title>
+      <link>https://treeboylife.com/blogroll/</link>
+      <pubDate>Wed, 24 Nov 2021 15:50:25 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blogroll/</guid>
+      <description>我在Internet或者现实世界中认识的小伙伴们，都是一群厉害的人呢！
+ Benny rehoni wwyqianqian FindHao  </description>
+    </item>
+    
+    <item>
       <title>About Tmux and Vim</title>
       <link>https://treeboylife.com/blog/about-tmux-and-vim/</link>
       <pubDate>Sun, 15 Aug 2021 19:54:37 +0800</pubDate>
@@ -122,6 +132,15 @@ Here is a basic example which demonstrates how virtual function works.</descript
       
       <guid>https://treeboylife.com/blog/migrate-blog-to-github-pages/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://treeboylife.com/about/</link>
+      <pubDate>Thu, 24 Nov 2016 15:42:40 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/about/</guid>
+      <description>About this site Hi, I&amp;rsquo;m dean. I build this site to share my life and study.</description>
     </item>
     
   </channel>
