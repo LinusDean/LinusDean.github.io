@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Onwership in Rust | Dean&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Blog</a></li>
+      
+      <li><a href="/categories">Categories</a></li>
+      
+      <li><a href="/tags">Tags</a></li>
+      
+      <li><a href="/about">About</a></li>
+      
+      <li><a href="/blogroll">Blogroll</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Onwership in Rust</span></h1>
+
+<h2 class="date">2021/11/26</h2>
+</div>
+
+<main>
+<h1 id="什么是所有权">什么是所有权？</h1>
+<p>Rust的核心特性就是所有权。</p>
+<p>所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。</p>
+<ul>
+<li>带有垃圾回收机制例如<em>Java</em>、<em>C#</em>，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。</li>
+<li>程序员显示地分配和释放内存，例如*C/C++*语言。</li>
+</ul>
+<p>Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。</p>
+<h1 id="stack-栈内存-vs-heap-堆内存">Stack (栈内存) vs Heap (堆内存)</h1>
+<p>在像Rust这样的系统级编程语言里，一个值在stack上还是heap上对语言的行为和你为什么要做某些决定时存在更大影响的。</p>
+<h2 id="存储数据">存储数据</h2>
+<ul>
+<li>Stack （后进先出 LIFO Last in first out）
+<ul>
+<li>栈上添加数据为压入栈</li>
+<li>栈上移除数据为弹出栈</li>
+</ul>
+</li>
+<li>所有存储在Stack上的数据必须拥有已知的固定的大小
+<ul>
+<li>编译时大小未知的数据或者运行时可能发生变化的数据必须存放在heap上</li>
+</ul>
+</li>
+<li>Heap对于内存的组织性差一些
+<ul>
+<li>当把数据放入到heap时，会请求一定数量的空间</li>
+<li>操作系统在heap里找到一块足够大的空间，把它标记为在用，并返回一个指针，也就是这个空间的地址</li>
+<li>这个过程就叫做在heap上分配</li>
+</ul>
+</li>
+</ul>
+<p>把值push到stack上不叫分配，因为指针ptr是已知固定大小的，可以把指针存放在stack上。如果你想访问实际的数据，你必须使用指针来定位</p>
+<blockquote>
+<p>The size of a pointer is not fixed. It depends upon different issues like operating system, CPU architecture etc. Usually it depends upon the word size of underlying processor for example a 32 bit computer the pointer size can be 4 bytes. For a 64bit computer the pointer size can be 8bytes. So for a specific architecture pointer size will be fixed.</p>
+</blockquote>
+<p>把数据压入到stack上要比heap上分配快得多， 因为操作系统不需要寻找用来存储新数据的空间，那个位置永远都在stack的顶端，在heap上分配空间需要做更多的工作，操作系统首先需要找到一个足够大的空间来存放数据，然后做好记录方便下次分配</p>
+<h2 id="访问数据">访问数据</h2>
+<p>访问heap中的数据要比访问stack中的数据慢，因为需要通过指针才能找到heap中的数据，对于现代的处理来说，因为存在缓存的缘故，如果指令在内存中跳转的次数越少，那么速度越快。</p>
+<ul>
+<li>
+<p>如果数据存放的距离比较近，那么处理器的处理速度就会更快一些（stack上）。</p>
+</li>
+<li>
+<p>如果数据之间的距离比较远，那么处理速度就会慢一些（heap上）</p>
+<ul>
+<li>在heap上分配大量空间也是非常耗时的</li>
+</ul>
+</li>
+</ul>
+<h2 id="函数调用">函数调用</h2>
+<p>当你的代码调用函数时，值被传入到函数（也包括指向heap的指针）。函数本地的变量会被压入到stack上。当函数结束后，这些值会从stack上弹出</p>
+<h2 id="所有权存在原因">所有权存在原因</h2>
+<ul>
+<li>
+<p>所有权解决的问题</p>
+<ul>
+<li>
+<p>跟踪代码的哪些部分正在使用heap的哪些数据</p>
+</li>
+<li>
+<p>最小化heap上的重复数据量</p>
+</li>
+<li>
+<p>清理heap上未使用的数据以避免空间不足</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="所有权规则">所有权规则</h2>
+<ul>
+<li>每一个值都有一个变量，该变量时该值的所有者</li>
+<li>每个值同时只能有一个所有者</li>
+<li>当所有者超出作用域（scope）时，该值会被删除。</li>
+</ul>
+<h3 id="变量作用域">变量作用域</h3>
+<p>Scope就是程序中一个项目的有效范围，例如</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+  <span style="color:#586e75">// s 不可用
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">let</span> s <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;Hello&#34;</span>;<span style="color:#586e75">// s可用
+</span><span style="color:#586e75"></span>                  <span style="color:#586e75">// 可以对s进行相关操作
+</span><span style="color:#586e75"></span>}<span style="color:#586e75">// s作用域到此结束，s不再可用
+</span></code></pre></div><h3 id="以复杂的string类型讲所有权">以复杂的String类型讲所有权</h3>
+<p>String类型（存储在堆上的）比基础标量数据类型更复杂，来看看Rust是如何处理它的</p>
+<h4 id="创建string类型的值">创建String类型的值</h4>
+<p>可以使用from函数从字符串字面值创建出String类型，例如<code>let s = String::from(&quot;Hello&quot;);</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+  <span style="color:#268bd2">let</span> <span style="color:#719e07">mut</span> s <span style="color:#719e07">=</span> <span style="color:#b58900">String</span>::from(<span style="color:#2aa198">&#34;Hello&#34;</span>); <span style="color:#586e75">// mut(即mutable)代表 s是可以修改的
+</span><span style="color:#586e75"></span>  
+  s.push_str(<span style="color:#2aa198">&#34;, World&#34;</span>);
+  
+  println<span style="color:#719e07">!</span>(<span style="color:#2aa198">&#34;{}&#34;</span>, s);
+}
+</code></pre></div><h4 id="内存和分配">内存和分配</h4>
+<ul>
+<li>字符串字面值，在编译时就知道它的内容了，其文本内容直接被硬编码到最终的可执行文件里，速度快、高效（得益于其不可变性）</li>
+<li>String类型，为了支持可变性，需要在heap上分配内存来保存编译时未知的文本内容
+<ul>
+<li>操作系统必须在运行时请求内存
+<ul>
+<li>通过调用String::from来实现</li>
+</ul>
+</li>
+<li>当用完String之后，需要使用某种方式将内存返回给操作系统
+<ul>
+<li>在拥有GC的语言中，GC会跟踪并清理不再使用的内存</li>
+<li>没有GC，就需要我们去识别内存何时不再使用，并调用代码将它返回。
+<ul>
+<li>如果忘记了，那么将会浪费内存</li>
+<li>如果提前，变量就会非法</li>
+<li>如果做了两次则会引起Bug。必须一次分配对应一次释放</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Rust采用了不同的方式：对于某个值来说，当拥有它的变量走出作用范围时，Rust会调用一个特殊的函数<strong>drop</strong>,内存会立即自动交还给操作系统。</p>
+<h4 id="变量和数据交互的方式-移动move">变量和数据交互的方式： 移动（Move）</h4>
+<p>一个String由三部分组成：</p>
+<ul>
+<li>一个指向存放字符串内容的指针</li>
+<li>一个长度len</li>
+<li>一个容量capacity</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+  <span style="color:#268bd2">let</span> s1 <span style="color:#719e07">=</span> <span style="color:#b58900">String</span>::from(<span style="color:#2aa198">&#34;Hello&#34;</span>);
+  <span style="color:#268bd2">let</span> s2 <span style="color:#719e07">=</span> s1;
+  prinln<span style="color:#719e07">!</span>(<span style="color:#2aa198">&#34;{}&#34;</span>, s1); <span style="color:#586e75">// 会报错， borrow of moved value: &#39;s1&#39;,
+</span><span style="color:#586e75"></span>  									<span style="color:#586e75">// move occurs because `s1` has type &#39;std::string::String&#39;, which does not implement the &#39;Copy&#39; trait
+</span><span style="color:#586e75"></span>}
+</code></pre></div><p>为了保证内存的安全，在上面的代码中，当s1移动到s2后，Rust会让s1失效。</p>
+<p>Rust中一个设计原则： Rust不会自动创建数据的深拷贝。</p>
+<h4 id="变量和数据交互的方式-克隆clone">变量和数据交互的方式： 克隆（Clone）</h4>
+<p>如果真想对heap上面的String数据进行深度拷贝，而不仅仅是stack上的数据，可以使用clone方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+  <span style="color:#268bd2">let</span> s1 <span style="color:#719e07">=</span> <span style="color:#b58900">String</span>::from(<span style="color:#2aa198">&#34;Hello&#34;</span>);
+  <span style="color:#268bd2">let</span> s2 <span style="color:#719e07">=</span> s1.clone();
+  
+  println<span style="color:#719e07">!</span>(<span style="color:#2aa198">&#34;{}, {}&#34;</span>, s1, s2);
+}
+</code></pre></div><p>克隆方法相当于是将stack和heap上的数据都完整拷贝了一份，clone这种方法是比较消耗资源的。</p>
+<h4 id="stack上的数据-复制">Stack上的数据： 复制</h4>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+  <span style="color:#268bd2">let</span> x <span style="color:#719e07">=</span> <span style="color:#2aa198">5</span>;
+  <span style="color:#268bd2">let</span> y <span style="color:#719e07">=</span> x;
+  println<span style="color:#719e07">!</span>(<span style="color:#2aa198">&#34;{}, {}&#34;</span>, x, y); <span style="color:#586e75">// x是整型，为标量类型，在编译的时就确定了大小
+</span><span style="color:#586e75"></span>}
+</code></pre></div><p>Copy trait,可以用于像整数这样完全存放在stack上面的类型，如果一个类型实现了Copy这个trait，那么旧的变量在赋值后仍然可用，如果一个类型或者该类型的一部分实现了Drop trait，那么Rust不允许让它再去实现Copy trait了</p>
+<h4 id="一些拥有copy-trait的类型">一些拥有Copy Trait的类型</h4>
+<ul>
+<li>任何简单标量的组合类型都可以是Copy的</li>
+<li>任何需要分配内存或者某种资源的都不可以实现Copy Trait的</li>
+<li>拥有Copy Trait的类型：
+<ul>
+<li>所有的整数类型，例如u32</li>
+<li>bool</li>
+<li>char</li>
+<li>所有浮点类型，例如f64</li>
+<li>Tuple（元组），如果所有字段都是Copy的则是可以拥有Copy Trait的，例如（i32, i32）</li>
+</ul>
+</li>
+</ul>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://treeboylife.com">Nan Dean</a> 2016 &ndash; 2021
+  
+  </footer>
+  </body>
+</html>
+

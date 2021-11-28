@@ -2,25 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://treeboylife.com/categories/2021/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/blog/onwership-in-rust/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/rust/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/categories/rust/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://treeboylife.com/tags/</loc>
+    <lastmod>2021-11-26T15:00:51+08:00</lastmod>
+  </url><url>
     <loc>https://treeboylife.com/blogroll/</loc>
     <lastmod>2021-11-24T15:50:25+08:00</lastmod>
   </url><url>
-    <loc>https://treeboylife.com/categories/2021/</loc>
-    <lastmod>2021-08-15T19:54:37+08:00</lastmod>
-  </url><url>
     <loc>https://treeboylife.com/blog/about-tmux-and-vim/</loc>
-    <lastmod>2021-08-15T19:54:37+08:00</lastmod>
-  </url><url>
-    <loc>https://treeboylife.com/blog/</loc>
-    <lastmod>2021-08-15T19:54:37+08:00</lastmod>
-  </url><url>
-    <loc>https://treeboylife.com/categories/</loc>
-    <lastmod>2021-08-15T19:54:37+08:00</lastmod>
-  </url><url>
-    <loc>https://treeboylife.com/</loc>
-    <lastmod>2021-08-15T19:54:37+08:00</lastmod>
-  </url><url>
-    <loc>https://treeboylife.com/tags/</loc>
     <lastmod>2021-08-15T19:54:37+08:00</lastmod>
   </url><url>
     <loc>https://treeboylife.com/tags/tmux/</loc>
@@ -51,12 +60,6 @@
     <lastmod>2021-08-02T12:35:18+08:00</lastmod>
   </url><url>
     <loc>https://treeboylife.com/blog/comments-in-rust/</loc>
-    <lastmod>2021-07-24T20:20:45+08:00</lastmod>
-  </url><url>
-    <loc>https://treeboylife.com/tags/rust/</loc>
-    <lastmod>2021-07-24T20:20:45+08:00</lastmod>
-  </url><url>
-    <loc>https://treeboylife.com/categories/rust/</loc>
     <lastmod>2021-07-24T20:20:45+08:00</lastmod>
   </url><url>
     <loc>https://treeboylife.com/blog/hello-world-rust/</loc>
