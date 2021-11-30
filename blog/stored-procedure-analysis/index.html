@@ -40,29 +40,29 @@
 我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。</p>
 <h2 id="主要思路">主要思路</h2>
 <p>调试语句的主要思路就是创建一个零时的表例如debugMsg</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#719e07">DROP</span> <span style="color:#719e07">TABLE</span> <span style="color:#719e07">IF</span> <span style="color:#719e07">EXISTS</span> <span style="color:#719e07">`</span>debugMsg<span style="color:#719e07">`</span>;
-<span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> <span style="color:#719e07">`</span>debugMsg<span style="color:#719e07">`</span> (
-  <span style="color:#719e07">`</span>msg<span style="color:#719e07">`</span> <span style="color:#b58900">varchar</span>(<span style="color:#2aa198">255</span>) <span style="color:#719e07">DEFAULT</span> <span style="color:#719e07">NULL</span>,
-  <span style="color:#719e07">`</span>datetime<span style="color:#719e07">`</span> <span style="color:#b58900">int</span>(<span style="color:#2aa198">8</span>) <span style="color:#719e07">DEFAULT</span> <span style="color:#719e07">NULL</span>
-) ENGINE<span style="color:#719e07">=</span>InnoDB <span style="color:#719e07">DEFAULT</span> CHARSET<span style="color:#719e07">=</span>utf8;
-</code></pre></div><p>在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#719e07">set</span> <span style="color:#719e07">@</span>debug_enable<span style="color:#719e07">=</span><span style="color:#719e07">FALSE</span>;
-<span style="color:#719e07">IF</span> <span style="color:#719e07">@</span>debug_enable <span style="color:#719e07">THEN</span>
-	<span style="color:#719e07">delete</span> <span style="color:#719e07">from</span> debugMsg;
-<span style="color:#719e07">END</span> <span style="color:#719e07">IF</span>;
-
-...
-
-<span style="color:#719e07">IF</span> <span style="color:#719e07">@</span>debug_enable <span style="color:#719e07">THEN</span>
-	<span style="color:#719e07">INSERT</span> <span style="color:#719e07">INTO</span> debugMsg(msg, datetime) <span style="color:#719e07">VALUES</span> (<span style="color:#2aa198">&#34;create case xxxxx....&#34;</span>, UNIX_TIMESTAMP());
-<span style="color:#719e07">END</span> <span style="color:#719e07">IF</span>;
-	业务代码部分
-
-
-<span style="color:#719e07">IF</span> <span style="color:#719e07">@</span>debug_enable <span style="color:#719e07">THEN</span>
-	<span style="color:#719e07">INSERT</span> <span style="color:#719e07">INTO</span> debugMsg(msg, datetime) <span style="color:#719e07">VALUES</span> (<span style="color:#2aa198">&#34;END create case xxxxx....&#34;</span>, UNIX_TIMESTAMP());
-<span style="color:#719e07">END</span> <span style="color:#719e07">IF</span>;
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#a2f;font-weight:bold">DROP</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">EXISTS</span><span style="color:#bbb"> </span><span style="color:#666">`</span>debugMsg<span style="color:#666">`</span>;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#666">`</span>debugMsg<span style="color:#666">`</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span><span style="color:#bbb">  </span><span style="color:#666">`</span>msg<span style="color:#666">`</span><span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">255</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">  </span><span style="color:#666">`</span>datetime<span style="color:#666">`</span><span style="color:#bbb"> </span><span style="color:#a2f">int</span>(<span style="color:#666">8</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>ENGINE<span style="color:#666">=</span>InnoDB<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span>CHARSET<span style="color:#666">=</span>utf8;<span style="color:#bbb">
+</span></code></pre></div><p>在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#a2f;font-weight:bold">set</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">FALSE</span>;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">THEN</span><span style="color:#bbb">
+</span><span style="color:#bbb">	</span><span style="color:#a2f;font-weight:bold">delete</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>debugMsg;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>...<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">THEN</span><span style="color:#bbb">
+</span><span style="color:#bbb">	</span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>debugMsg(msg,<span style="color:#bbb"> </span>datetime)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#34;create case xxxxx....&#34;</span>,<span style="color:#bbb"> </span>UNIX_TIMESTAMP());<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">	</span><span style="">业务代码部分</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">THEN</span><span style="color:#bbb">
+</span><span style="color:#bbb">	</span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>debugMsg(msg,<span style="color:#bbb"> </span>datetime)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#34;END create case xxxxx....&#34;</span>,<span style="color:#bbb"> </span>UNIX_TIMESTAMP());<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span>;<span style="color:#bbb">
+</span></code></pre></div>
 </main>
 <hr />
 <h1>Comments🎉</h1>

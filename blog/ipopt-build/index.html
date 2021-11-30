@@ -46,11 +46,11 @@ nonlinear optimization. You can find the official documentation <a href="https:/
 </ul>
 <h3 id="compile-and-install-lapack">Compile And Install LAPACK</h3>
 <p>First we need to download the source code and compile to dynamic shared library.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz
 </code></pre></div><p>The LAPACK is compiled to static library by default with unmodified rule, we need to change the 45th line of <strong>CMakeLists.txt</strong> file.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">option(BUILD_SHARED_LIBS <span style="color:#2aa198">&#34;Build shared libraries&#34;</span> ON)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">option(BUILD_SHARED_LIBS <span style="color:#b44">&#34;Build shared libraries&#34;</span> ON)
 </code></pre></div><p>Make build directory and we are good to go.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir build <span style="color:#719e07">&amp;&amp;</span> <span style="color:#b58900">cd</span> build
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir build <span style="color:#666">&amp;&amp;</span> <span style="color:#a2f">cd</span> build
 cmake ../
 make
 make install
@@ -61,15 +61,15 @@ make install
 <li>HSL Full (Academic use only)</li>
 </ul>
 <p>To obtain the HSL code, you can follow the instructions <a href="https://coin-or.github.io/Ipopt/INSTALL.html#DOWNLOAD_HSL">here.</a>  To compile the HSL code via the COIN-OR Tools project ThirdParty-HSL.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or-tools/ThirdParty-HSL.git
-<span style="color:#b58900">cd</span> ThirdParty-HSL
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or-tools/ThirdParty-HSL.git
+<span style="color:#a2f">cd</span> ThirdParty-HSL
 ./configure
 make
 sudo make install
 </code></pre></div><h3 id="compile-ipopt">Compile Ipopt</h3>
 <p>If all the dependencies were correctly installed and default path <strong>/usr/local/lib64</strong> was added to the <strong>LD_LIBRARY_PATH</strong> the Ipopt was very easy to compile. Just clone the project and create a build directory, config it then make.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or/Ipopt
-<span style="color:#b58900">cd</span> Ipopt <span style="color:#719e07">&amp;&amp;</span> mkdir build
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/coin-or/Ipopt
+<span style="color:#a2f">cd</span> Ipopt <span style="color:#666">&amp;&amp;</span> mkdir build
 ../configure
 make
 </code></pre></div><p>After compiling the whole code, make sure executing <code>make test</code> to check if the Ipopt were working properly.</p>

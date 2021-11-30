@@ -38,23 +38,23 @@
 <p>公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。</p>
 <h1 id="solution">Solution</h1>
 <p>通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#719e07">FROM</span><span style="color:#2aa198"> centos:7</span>
-<span style="color:#719e07">ENV</span> container docker
-<span style="color:#719e07">RUN</span> yum -y install systemd; yum clean all;
-<span style="color:#719e07">RUN</span> <span style="color:#719e07">(</span><span style="color:#b58900">cd</span> /lib/systemd/system/sysinit.target.wants/; <span style="color:#719e07">for</span> i in ; <span style="color:#719e07">do</span> <span style="color:#719e07">[</span> <span style="color:#268bd2">$i</span> <span style="color:#719e07">==</span> systemd-tmpfiles-setup.service <span style="color:#719e07">]</span> <span style="color:#719e07">||</span> rm -f <span style="color:#268bd2">$i</span>; <span style="color:#719e07">done</span><span style="color:#719e07">)</span>;
-<span style="color:#719e07">RUN</span> rm -rf /lib/systemd/system/multi-user.target.wants/;
-<span style="color:#719e07">RUN</span> rm -rf /etc/systemd/system/.wants/;
-<span style="color:#719e07">RUN</span> rm -rf /lib/systemd/system/local-fs.target.wants/;
-<span style="color:#719e07">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/udev;
-<span style="color:#719e07">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/initctl;
-<span style="color:#719e07">RUN</span> rm -rf /lib/systemd/system/basic.target.wants/;
-<span style="color:#719e07">RUN</span> rm -rf /lib/systemd/system/anaconda.target.wants/*;
-<span style="color:#719e07">VOLUME</span> [ <span style="color:#2aa198">&#34;/sys/fs/cgroup&#34;</span> ] 
-<span style="color:#719e07">RUN</span> yum -y install gcc
-<span style="color:#719e07">RUN</span> yum -y install epel-release
-<span style="color:#719e07">RUN</span> yum -y install snapd
-<span style="color:#719e07">CMD</span> [<span style="color:#2aa198">&#34;/usr/sbin/init&#34;</span>]
-</code></pre></div><p>在Docker目录的同级目录下面执行docker build -t dev .<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#b44"> centos:7</span><span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">ENV</span> container docker<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install systemd; yum clean all;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> <span style="color:#666">(</span><span style="color:#a2f">cd</span> /lib/systemd/system/sysinit.target.wants/; <span style="color:#a2f;font-weight:bold">for</span> i in ; <span style="color:#a2f;font-weight:bold">do</span> <span style="color:#666">[</span> <span style="color:#b8860b">$i</span> <span style="color:#666">==</span> systemd-tmpfiles-setup.service <span style="color:#666">]</span> <span style="color:#666">||</span> rm -f <span style="color:#b8860b">$i</span>; <span style="color:#a2f;font-weight:bold">done</span><span style="color:#666">)</span>;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/multi-user.target.wants/;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /etc/systemd/system/.wants/;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/local-fs.target.wants/;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/udev;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/initctl;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/basic.target.wants/;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/anaconda.target.wants/*;<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">VOLUME</span> [ <span style="color:#b44">&#34;/sys/fs/cgroup&#34;</span> ] <span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install gcc<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install epel-release<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install snapd<span style="">
+</span><span style=""></span><span style="color:#a2f;font-weight:bold">CMD</span> [<span style="color:#b44">&#34;/usr/sbin/init&#34;</span>]<span style="">
+</span></code></pre></div><p>在Docker目录的同级目录下面执行docker build -t dev .<br>
 我们在执行完之后去执行docker run -itd &ndash;name container01 &ndash;privileged=true dev /sbin/init 启动容器<br>
 使用docker exec -ti container01 bash进入容器的交互shell,执行systemctl status snapd如果没有报错那么恭喜你，成功地在容器下面使用了systemd,安装ccls可以参考下图中地命令
 <img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/systemd-in-docker-container.png" alt="&ldquo;systemd and ccls&rdquo;"></p>

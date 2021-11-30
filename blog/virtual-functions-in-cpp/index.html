@@ -39,46 +39,46 @@
 Basically a virtual function is used in the base class in order to ensure that the function is <strong>overriden</strong>.<br>
 This especially applies to cases where a pointer of base class points to an object of a derived class.<br>
 Here is a basic example which demonstrates how virtual function works.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#719e07">#include</span> <span style="color:#719e07">&lt;iostream&gt;</span><span style="color:#719e07">
-</span><span style="color:#719e07">#include</span> <span style="color:#719e07">&lt;string&gt;</span><span style="color:#719e07">
-</span><span style="color:#719e07"></span>
-<span style="color:#719e07">class</span> <span style="color:#268bd2">Entity</span> 
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#080">#include</span> <span style="color:#080">&lt;iostream&gt;</span><span style="color:#080">
+</span><span style="color:#080">#include</span> <span style="color:#080">&lt;string&gt;</span><span style="color:#080">
+</span><span style="color:#080"></span>
+<span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Entity</span> 
 {
-<span style="color:#719e07">public</span><span style="color:#719e07">:</span>
-    <span style="color:#719e07">virtual</span> std<span style="color:#719e07">::</span>string GetName() { <span style="color:#719e07">return</span> <span style="color:#2aa198">&#34;Entity&#34;</span>; }
+<span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+    <span style="color:#a2f;font-weight:bold">virtual</span> std<span style="color:#666">::</span>string GetName() { <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;Entity&#34;</span>; }
 };
 
-<span style="color:#719e07">class</span> <span style="color:#268bd2">Person</span><span style="color:#719e07">:</span> <span style="color:#719e07">public</span> Entity
+<span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Person</span><span style="color:#666">:</span> <span style="color:#a2f;font-weight:bold">public</span> Entity
 {
-<span style="color:#719e07">private</span><span style="color:#719e07">:</span>
-    std<span style="color:#719e07">::</span>string m_Name;
+<span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+    std<span style="color:#666">::</span>string m_Name;
 
-<span style="color:#719e07">public</span><span style="color:#719e07">:</span>
-    Person(<span style="color:#719e07">const</span> std<span style="color:#719e07">::</span>string<span style="color:#719e07">&amp;</span> name) <span style="color:#719e07">:</span> m_Name(name) {}
-    std<span style="color:#719e07">::</span>string GetName() { <span style="color:#719e07">return</span> m_Name; }
+<span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+    Person(<span style="color:#a2f;font-weight:bold">const</span> std<span style="color:#666">::</span>string<span style="color:#666">&amp;</span> name) <span style="color:#666">:</span> m_Name(name) {}
+    std<span style="color:#666">::</span>string GetName() { <span style="color:#a2f;font-weight:bold">return</span> m_Name; }
 };
 
-<span style="color:#dc322f">void</span> <span style="color:#268bd2">print</span>(Entity<span style="color:#719e07">*</span> entity)
+<span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">print</span>(Entity<span style="color:#666">*</span> entity)
 {
-    std<span style="color:#719e07">::</span>cout <span style="color:#719e07">&lt;&lt;</span> entity<span style="color:#719e07">-&gt;</span>GetName() <span style="color:#719e07">&lt;&lt;</span> std<span style="color:#719e07">::</span>endl;
+    std<span style="color:#666">::</span>cout <span style="color:#666">&lt;&lt;</span> entity<span style="color:#666">-&gt;</span>GetName() <span style="color:#666">&lt;&lt;</span> std<span style="color:#666">::</span>endl;
 }
 
-<span style="color:#dc322f">int</span> <span style="color:#268bd2">main</span>()
+<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">main</span>()
 {
-    Entity<span style="color:#719e07">*</span> e <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Entity();
+    Entity<span style="color:#666">*</span> e <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Entity();
     print(e);
 
-    Person<span style="color:#719e07">*</span> p <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Person(<span style="color:#2aa198">&#34;Jacky&#34;</span>);
+    Person<span style="color:#666">*</span> p <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Person(<span style="color:#b44">&#34;Jacky&#34;</span>);
     print(p);
 
-    <span style="color:#719e07">delete</span> e;
-    <span style="color:#719e07">delete</span> p;
-    <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
+    <span style="color:#a2f;font-weight:bold">delete</span> e;
+    <span style="color:#a2f;font-weight:bold">delete</span> p;
+    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 }
 
-<span style="color:#586e75">// OutPut:
-</span><span style="color:#586e75">// Entity
-</span><span style="color:#586e75">// Jacky
+<span style="color:#080;font-style:italic">// OutPut:
+</span><span style="color:#080;font-style:italic">// Entity
+</span><span style="color:#080;font-style:italic">// Jacky
 </span></code></pre></div>
 </main>
 <hr />

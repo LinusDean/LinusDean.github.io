@@ -38,7 +38,7 @@ Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言�
       
       <guid>https://treeboylife.com/blog/hello-world-rust/</guid>
       <description>Hello World Rust 语言中最简单的一个Hello World程序
-fn main() { println!(&amp;#34;Hello Rust!&amp;#34;); } 在Rust中println!是一个宏(Marco)用于输出字符串
+fn main(){println!(&amp;#34;Hello Rust!&amp;#34;);}在Rust中println!是一个宏(Marco)用于输出字符串
 rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</description>
     </item>
     

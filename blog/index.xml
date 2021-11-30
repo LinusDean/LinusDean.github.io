@@ -43,7 +43,7 @@ bind h select-pane -L bind j select-pane -D bind k select-pane -U bind l select-
       <guid>https://treeboylife.com/blog/use-systemd-in-docker-container/</guid>
       <description>Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。
 Solution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile
-FROMcentos:7 ENV container docker RUN yum -y install systemd; yum clean all; RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); RUN rm -rf /lib/systemd/system/multi-user.target.wants/; RUN rm -rf /etc/systemd/system/.wants/; RUN rm -rf /lib/systemd/system/local-fs.target.wants/; RUN rm -rf /lib/systemd/system/sockets.target.wants/udev; RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl; RUN rm -rf /lib/systemd/system/basic.target.wants/; RUN rm -rf /lib/systemd/system/anaconda.target.wants/*; VOLUME [ &amp;#34;/sys/fs/cgroup&amp;#34; ] RUN yum -y install gcc RUN yum -y install epel-release RUN yum -y install snapd CMD [&amp;#34;/usr/sbin/init&amp;#34;] 在Docker目录的同级目录下面执行docker build -t dev .</description>
+FROMcentos:7ENV container dockerRUN yum -y install systemd; yum clean all;RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);RUN rm -rf /lib/systemd/system/multi-user.target.wants/;RUN rm -rf /etc/systemd/system/.wants/;RUN rm -rf /lib/systemd/system/local-fs.target.wants/;RUN rm -rf /lib/systemd/system/sockets.target.wants/udev;RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl;RUN rm -rf /lib/systemd/system/basic.target.wants/;RUN rm -rf /lib/systemd/system/anaconda.target.wants/*;VOLUME [ &amp;#34;/sys/fs/cgroup&amp;#34; ] RUN yum -y install gccRUN yum -y install epel-releaseRUN yum -y install snapdCMD [&amp;#34;/usr/sbin/init&amp;#34;]在Docker目录的同级目录下面执行docker build -t dev .</description>
     </item>
     
     <item>
@@ -77,7 +77,7 @@ iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 1.1.1
       
       <guid>https://treeboylife.com/blog/hello-world-rust/</guid>
       <description>Hello World Rust 语言中最简单的一个Hello World程序
-fn main() { println!(&amp;#34;Hello Rust!&amp;#34;); } 在Rust中println!是一个宏(Marco)用于输出字符串
+fn main(){println!(&amp;#34;Hello Rust!&amp;#34;);}在Rust中println!是一个宏(Marco)用于输出字符串
 rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</description>
     </item>
     
@@ -91,8 +91,8 @@ rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc hellowo
 在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此
 我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。
 主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg
-DROP TABLE IF EXISTS `debugMsg`; CREATE TABLE `debugMsg` ( `msg` varchar(255) DEFAULT NULL, `datetime` int(8) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
-set @debug_enable=FALSE; IF @debug_enable THEN delete from debugMsg; END IF; ... IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&amp;#34;create case xxxxx....&amp;#34;, UNIX_TIMESTAMP()); END IF; 业务代码部分 IF @debug_enable THEN INSERT INTO debugMsg(msg, datetime) VALUES (&amp;#34;END create case xxxxx....&amp;#34;, UNIX_TIMESTAMP()); END IF; </description>
+DROPTABLEIFEXISTS`debugMsg`;CREATETABLE`debugMsg`(`msg`varchar(255)DEFAULTNULL,`datetime`int(8)DEFAULTNULL)ENGINE=InnoDBDEFAULTCHARSET=utf8;在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
+set@debug_enable=FALSE;IF@debug_enableTHENdeletefromdebugMsg;ENDIF;...IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(&amp;#34;create case xxxxx....&amp;#34;,UNIX_TIMESTAMP());ENDIF;业务代码部分IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(&amp;#34;END create case xxxxx.</description>
     </item>
     
     <item>
