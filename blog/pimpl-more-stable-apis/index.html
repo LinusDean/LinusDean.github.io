@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PIMPL More Stable APIs | Dean&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Blog</a></li>
+      
+      <li><a href="/categories">Categories</a></li>
+      
+      <li><a href="/tags">Tags</a></li>
+      
+      <li><a href="/about">About</a></li>
+      
+      <li><a href="/blogroll">Blogroll</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">PIMPL More Stable APIs</span></h1>
+
+<h2 class="date">2022/07/09</h2>
+</div>
+
+<main>
+<blockquote>
+<p>Pimpl a.k.a (Pointer to implentation) 是一种现代C++技术，用于隐藏实现，尽量减少耦合，并分离接口。</p>
+</blockquote>
+<h1 id="为什么使用pimpl">为什么使用pimpl？</h1>
+<p>在软件开发中，使用Pimpl有一下三点好处</p>
+<ul>
+<li>最小化编译依赖</li>
+<li>实现接口和实现的分离</li>
+<li>可移植性</li>
+</ul>
+<h1 id="pimpl头文件">Pimpl头文件</h1>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#080">#ifndef IMPL_PERSON_H
+</span><span style="color:#080">#define IMPL_PERSON_H
+</span><span style="color:#080">#include</span> <span style="color:#080">&lt;string&gt;</span><span style="color:#080">
+</span><span style="color:#080">#include</span> <span style="color:#080">&lt;memory&gt;</span><span style="color:#080">
+</span><span style="color:#080"></span>
+<span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Person</span> {
+<span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+  Person(std<span style="color:#666">::</span>string name);
+  <span style="color:#666">~</span>Person();
+  std<span style="color:#666">::</span>string GetAttributes();
+
+<span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+  <span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">pImplPerson</span>;
+  std<span style="color:#666">::</span>unique_ptr<span style="color:#666">&lt;</span>pImplPerson<span style="color:#666">&gt;</span> m_impl;
+};
+
+<span style="color:#080">#endif </span><span style="color:#080;font-style:italic">// IMPL_PERSON_H
+</span></code></pre></div><h1 id="pimpl实现">Pimpl实现</h1>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#080">#include</span> <span style="color:#080">&#34;person.h&#34;</span><span style="color:#080">
+</span><span style="color:#080">#include</span> <span style="color:#080">&lt;iostream&gt;</span><span style="color:#080">
+</span><span style="color:#080"></span>
+<span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">Person</span><span style="color:#666">::</span>pImplPerson {
+  std<span style="color:#666">::</span>string m_name;
+  std<span style="color:#666">::</span>string m_strength;
+  std<span style="color:#666">::</span>string m_speed;
+};
+
+Person<span style="color:#666">::</span>Person(std<span style="color:#666">::</span>string name) {
+  m_impl <span style="color:#666">=</span> std<span style="color:#666">::</span>make_unique<span style="color:#666">&lt;</span>pImplPerson<span style="color:#666">&gt;</span>();
+  m_impl<span style="color:#666">-&gt;</span>m_name <span style="color:#666">=</span> name;
+  m_impl<span style="color:#666">-&gt;</span>m_speed <span style="color:#666">=</span> <span style="color:#b44">&#34;n/a&#34;</span>;
+  m_impl<span style="color:#666">-&gt;</span>m_strength <span style="color:#666">=</span> <span style="color:#b44">&#34;n/a&#34;</span>;
+}
+
+Person<span style="color:#666">::~</span>Person() {}
+
+std<span style="color:#666">::</span>string Person<span style="color:#666">::</span>GetAttributes() {
+  std<span style="color:#666">::</span>string retStr <span style="color:#666">=</span> <span style="color:#b44">&#34;name: &#34;</span> <span style="color:#666">+</span> m_impl<span style="color:#666">-&gt;</span>m_name <span style="color:#666">+</span>
+                       <span style="color:#b44">&#34; speed: &#34;</span> <span style="color:#666">+</span> m_impl<span style="color:#666">-&gt;</span>m_speed <span style="color:#666">+</span>
+                       <span style="color:#b44">&#34; strength: &#34;</span> <span style="color:#666">+</span> m_impl<span style="color:#666">-&gt;</span>m_strength;
+  <span style="color:#a2f;font-weight:bold">return</span> retStr;
+}
+</code></pre></div><h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://stackoverflow.com/questions/60570/why-should-the-pimpl-idiom-be-used">why-should-the-pimpl-idiom-be-used</a></li>
+<li><a href="https://docs.microsoft.com/en-us/cpp/cpp/pimpl-for-compile-time-encapsulation-modern-cpp?view=msvc-170">Pimpl For Compile-Time Encapsulation (Modern C++)</a></li>
+</ul>
+
+</main>
+<hr />
+<h1>Comments🎉</h1>
+
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="5b549074-8206-4098-983b-d54bb541397a"
+  data-page-id="13004fe0ee302b07e0f46ca2a8da54e1"
+  data-page-url="https://treeboylife.com/blog/pimpl-more-stable-apis/"
+  data-page-title="PIMPL More Stable APIs"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://treeboylife.com">Nan Dean</a> 2016 &ndash; 2021
+  
+  </footer>
+  </body>
+</html>
+
