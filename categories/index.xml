@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Dean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Jul 2022 16:11:32 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Jul 2022 15:32:58 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>leetcode</title>
+      <link>https://treeboylife.com/categories/leetcode/</link>
+      <pubDate>Sun, 10 Jul 2022 15:32:58 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/categories/leetcode/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;</title>
       <link>https://treeboylife.com/categories/c&#43;&#43;/</link>
@@ -67,15 +76,6 @@
       <pubDate>Fri, 16 Jul 2021 20:36:00 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/ts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>leetcode</title>
-      <link>https://treeboylife.com/categories/leetcode/</link>
-      <pubDate>Sat, 17 Apr 2021 20:09:44 +0800</pubDate>
-      
-      <guid>https://treeboylife.com/categories/leetcode/</guid>
       <description></description>
     </item>
     

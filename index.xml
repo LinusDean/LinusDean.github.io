@@ -6,7 +6,17 @@
     <description>Recent content on Dean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Jul 2022 16:11:32 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Jul 2022 15:32:58 +0800</lastBuildDate><atom:link href="https://treeboylife.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 217</title>
+      <link>https://treeboylife.com/blog/leetcode-217/</link>
+      <pubDate>Sun, 10 Jul 2022 15:32:58 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blog/leetcode-217/</guid>
+      <description>217. Contains Duplicate 挺简单的一道题目，一开始想用暴力点求解，但是感觉太蠢了，用hash表秒过
+class Solution { public: bool containsDuplicate(vector&amp;lt;int&amp;gt;&amp;amp; nums) { unordered_map&amp;lt;int, int&amp;gt; hashmap; for (int i = 0; i &amp;lt; nums.size(); i++) { unordered_map&amp;lt;int, int&amp;gt;::const_iterator got = hashmap.find(nums[i]); if (got == hashmap.end()) { hashmap.insert({nums[i], i}); continue; } else { return true; } } return false; } }; </description>
+    </item>
+    
     <item>
       <title>PIMPL More Stable APIs</title>
       <link>https://treeboylife.com/blog/pimpl-more-stable-apis/</link>
