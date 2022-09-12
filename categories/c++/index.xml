@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>C&#43;&#43; on LofiCafe&#39;s Blog</title>
+    <title>C&#43;&#43; on Lofi Cafe</title>
     <link>https://treeboylife.com/categories/c&#43;&#43;/</link>
-    <description>Recent content in C&#43;&#43; on LofiCafe&#39;s Blog</description>
+    <description>Recent content in C&#43;&#43; on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>© 2022 loficafe</copyright>
     <lastBuildDate>Sat, 09 Jul 2022 16:11:32 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PIMPL More Stable APIs</title>
@@ -13,11 +14,9 @@
       <pubDate>Sat, 09 Jul 2022 16:11:32 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/pimpl-more-stable-apis/</guid>
-      
-        <description> Pimpl a.k.a (Pointer to implentation) 是一种现代C++技术，用于隐藏实现，尽量减少耦合，并分离接口。
- 为什么使用pimpl？ 在软件开发中，使用Pimpl有一下三点好处
- 最小化编译依赖 实现接口和实现的分离 可移植性  Pimpl头文件 #ifndef IMPL_PERSON_H #define IMPL_PERSON_H #include &amp;lt;string&amp;gt;#include &amp;lt;memory&amp;gt; class Person { public: Person(std::string name); ~Person(); std::string GetAttributes(); private: struct pImplPerson; std::unique_ptr&amp;lt;pImplPerson&amp;gt; m_impl; }; #endif // IMPL_PERSON_H Pimpl实现 #include &amp;#34;person.h&amp;#34;#include &amp;lt;iostream&amp;gt; struct Person::pImplPerson { std::string m_name; std::string m_strength; std::string m_speed; }; Person::Person(std::string name) { m_impl = std::make_unique&amp;lt;pImplPerson&amp;gt;(); m_impl-&amp;gt;m_name = name; m_impl-&amp;gt;m_speed = &amp;#34;n/a&amp;#34;; m_impl-&amp;gt;m_strength = &amp;#34;n/a&amp;#34;; } Person::~Person() {} std::string Person::GetAttributes() { std::string retStr = &amp;#34;name: &amp;#34; + m_impl-&amp;gt;m_name + &amp;#34; speed: &amp;#34; + m_impl-&amp;gt;m_speed + &amp;#34; strength: &amp;#34; + m_impl-&amp;gt;m_strength; return retStr; } 参考链接  why-should-the-pimpl-idiom-be-used Pimpl For Compile-Time Encapsulation (Modern C++)  </description>
-      
+      <description> Pimpl a.k.a (Pointer to implentation) 是一种现代C++技术，用于隐藏实现，尽量减少耦合，并分离接口。
+为什么使用pimpl？ 在软件开发中，使用Pimpl有一下三点好处
+最小化编译依赖 实现接口和实现的分离 可移植性 Pimpl头文件 #ifndef IMPL_PERSON_H #define IMPL_PERSON_H #include &amp;lt;string&amp;gt; #include &amp;lt;memory&amp;gt; class Person { public: Person(std::string name); ~Person(); std::string GetAttributes(); private: struct pImplPerson; std::unique_ptr&amp;lt;pImplPerson&amp;gt; m_impl; }; #endif // IMPL_PERSON_H Pimpl实现 #include &amp;#34;person.h&amp;#34; #include &amp;lt;iostream&amp;gt; struct Person::pImplPerson { std::string m_name; std::string m_strength; std::string m_speed; }; Person::Person(std::string name) { m_impl = std::make_unique&amp;lt;pImplPerson&amp;gt;(); m_impl-&amp;gt;m_name = name; m_impl-&amp;gt;m_speed = &amp;#34;n/a&amp;#34;; m_impl-&amp;gt;m_strength = &amp;#34;n/a&amp;#34;; } Person::~Person() {} std::string Person::GetAttributes() { std::string retStr = &amp;#34;name: &amp;#34; + m_impl-&amp;gt;m_name + &amp;#34; speed: &amp;#34; + m_impl-&amp;gt;m_speed + &amp;#34; strength: &amp;#34; + m_impl-&amp;gt;m_strength; return retStr; } 参考链接 why-should-the-pimpl-idiom-be-used Pimpl For Compile-Time Encapsulation (Modern C++) </description>
     </item>
     
     <item>
@@ -26,12 +25,10 @@
       <pubDate>Sun, 28 Feb 2021 10:02:46 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/virtual-functions-in-cpp/</guid>
-      
-        <description>What is virtual function? A virtual function is a member function in the base class that we expect to redefine in derived classes.
+      <description>What is virtual function? A virtual function is a member function in the base class that we expect to redefine in derived classes.
 Basically a virtual function is used in the base class in order to ensure that the function is overriden.
 This especially applies to cases where a pointer of base class points to an object of a derived class.
 Here is a basic example which demonstrates how virtual function works.</description>
-      
     </item>
     
   </channel>

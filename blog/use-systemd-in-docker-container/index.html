@@ -1,483 +1,117 @@
 <!DOCTYPE html>
-<html
-  dir="ltr"
-  lang="en"
-  data-theme=""
-  class="html"
-><head>
-  <title>
-    LofiCafe
-        |
-        Use Systemd in Docker Container
+<html lang="en">
 
+    <head><title>Use Systemd in Docker Container &ndash; Lofi Cafe</title>
+<meta name="description" content="Blog about tech and life!">
 
-      
-
-
-    
-
-  </title>
-
-  
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.84.4" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="author" content="LofiCafe" />
-  <meta
-    name="description"
-    content="Blog about tech and life"
-  />
-  
-  
-    
-    
-    <link
-      rel="stylesheet"
-      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
-      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
-      crossorigin="anonymous"
-      type="text/css"
-    />
-
-  
-
-  
-  <link
-    rel="stylesheet"
-    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
-    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
-    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
-    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
-    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
-    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-
-  <link rel="canonical" href="https://treeboylife.com/blog/use-systemd-in-docker-container/" />
-
-  
-  
-  
-  
-  <script
-    type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
-    crossorigin="anonymous"
-  ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
-
-  
-
-  
-
-
-  
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Use Systemd in Docker Container"/>
-<meta name="twitter:description" content="Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。
-Solution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile
-FROMcentos:7ENV container dockerRUN yum -y install systemd; yum clean all;RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);RUN rm -rf /lib/systemd/system/multi-user.target.wants/;RUN rm -rf /etc/systemd/system/.wants/;RUN rm -rf /lib/systemd/system/local-fs.target.wants/;RUN rm -rf /lib/systemd/system/sockets.target.wants/udev;RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl;RUN rm -rf /lib/systemd/system/basic.target.wants/;RUN rm -rf /lib/systemd/system/anaconda.target.wants/*;VOLUME [ &#34;/sys/fs/cgroup&#34; ] RUN yum -y install gccRUN yum -y install epel-releaseRUN yum -y install snapdCMD [&#34;/usr/sbin/init&#34;]在Docker目录的同级目录下面执行docker build -t dev ."/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
 
 
 
-  
-  <meta property="og:title" content="Use Systemd in Docker Container" />
-<meta property="og:description" content="Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。
-Solution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile
-FROMcentos:7ENV container dockerRUN yum -y install systemd; yum clean all;RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);RUN rm -rf /lib/systemd/system/multi-user.target.wants/;RUN rm -rf /etc/systemd/system/.wants/;RUN rm -rf /lib/systemd/system/local-fs.target.wants/;RUN rm -rf /lib/systemd/system/sockets.target.wants/udev;RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl;RUN rm -rf /lib/systemd/system/basic.target.wants/;RUN rm -rf /lib/systemd/system/anaconda.target.wants/*;VOLUME [ &#34;/sys/fs/cgroup&#34; ] RUN yum -y install gccRUN yum -y install epel-releaseRUN yum -y install snapdCMD [&#34;/usr/sbin/init&#34;]在Docker目录的同级目录下面执行docker build -t dev ." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://treeboylife.com/blog/use-systemd-in-docker-container/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2021-08-03T14:52:27+08:00" />
-<meta property="article:modified_time" content="2021-08-03T14:52:27+08:00" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
 
 
-  
-  
-  
-  
-  <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "articleSection": "blog",
-        "name": "Use Systemd in Docker Container",
-        "headline": "Use Systemd in Docker Container",
-        "alternativeHeadline": "",
-        "description": "
-      
-        Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。\nSolution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile\nFROMcentos:7ENV container dockerRUN yum -y install systemd; yum clean all;RUN (cd \/lib\/systemd\/system\/sysinit.target.wants\/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);RUN rm -rf \/lib\/systemd\/system\/multi-user.target.wants\/;RUN rm -rf \/etc\/systemd\/system\/.wants\/;RUN rm -rf \/lib\/systemd\/system\/local-fs.target.wants\/;RUN rm -rf \/lib\/systemd\/system\/sockets.target.wants\/udev;RUN rm -rf \/lib\/systemd\/system\/sockets.target.wants\/initctl;RUN rm -rf \/lib\/systemd\/system\/basic.target.wants\/;RUN rm -rf \/lib\/systemd\/system\/anaconda.target.wants\/*;VOLUME [ \u0026#34;\/sys\/fs\/cgroup\u0026#34; ] RUN yum -y install gccRUN yum -y install epel-releaseRUN yum -y install snapdCMD [\u0026#34;\/usr\/sbin\/init\u0026#34;]在Docker目录的同级目录下面执行docker build -t dev .
-
-
-      
-
-
-    ",
-        "inLanguage": "en-us",
-        "isFamilyFriendly": "true",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/treeboylife.com\/blog\/use-systemd-in-docker-container\/"
-        },
-        "author" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "creator" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "accountablePerson" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "copyrightHolder" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "copyrightYear" : "2021",
-        "dateCreated": "2021-08-03T14:52:27.00Z",
-        "datePublished": "2021-08-03T14:52:27.00Z",
-        "dateModified": "2021-08-03T14:52:27.00Z",
-        "publisher":{
-            "@type":"Organization",
-            "name": "LofiCafe",
-            "url": "https://treeboylife.com",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https:\/\/treeboylife.comfavicon-32x32.png",
-                "width":"32",
-                "height":"32"
-            }
-        },
-        "image": 
-      [
-      ]
-
-    ,
-        "url" : "https:\/\/treeboylife.com\/blog\/use-systemd-in-docker-container\/",
-        "wordCount" : "94",
-        "genre" : [ 
-      
-      "Linux"
-
-    ],
-        "keywords" : [ 
-      
-      "Linux"
-
-    
-      
-        ,
-
-      
-      "Docker"
-
-    ]
-    }
-  </script>
-
-
-
+<link rel="stylesheet" href="https://treeboylife.com/css/colour/gruvbox-dark.css">
+<link rel="stylesheet" href="https://treeboylife.com/css/colour/dark-mode.css">
+<link rel="stylesheet" href="https://treeboylife.com/css/risotto.css">
+<link rel="stylesheet" href="https://treeboylife.com/css/custom.css">
 </head>
-<body
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><h1 class="page__logo"><a href="https://treeboylife.com" class="page__logo-inner">Lofi Cafe</a></h1>
+<nav class="page__nav main-nav">
+    <ul>
     
-      class="body theme--light"
-
     
-  >
-    <div class="wrapper">
-      <aside
-        
-          class="wrapper__sidebar"
-
-        
-      ><div
-  class="sidebar
-    animated fadeInDown
-
-  "
->
-  <div class="sidebar__content">
-    <div class="sidebar__introduction">
-      <img
-        class="sidebar__introduction-profileimage"
-        src="/"
-        alt="profile picture"
-      />
-      
-        <div class="sidebar__introduction-title">
-          <a href="/"></a>
-        </div>
-
-      
-      <div class="sidebar__introduction-description">
-        <p>Blog about tech and life</p>
-      </div>
-    </div>
-    <ul class="sidebar__list">
-      
-    </ul>
-  </div><footer class="footer footer__sidebar">
-  <ul class="footer__list">
-    <li class="footer__item">
-      &copy;
-      
-        LofiCafe
-        2022
-
-
-      
-    </li>
+    <li class="main-nav__item"><a class="nav-main-item" href="/about/" title="">About</a></li>
     
-  </ul>
-</footer>
-  
-  <script
-    type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
-    crossorigin="anonymous"
-  ></script></div>
-</aside>
-      <main
-        
-          class="wrapper__main"
-
-        
-      >
-        <header class="header"><div
-  class="
-    animated fadeInDown
-
-  "
->
-  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-    <span aria-hidden="true" class="navbar-burger__line"></span>
-    <span aria-hidden="true" class="navbar-burger__line"></span>
-    <span aria-hidden="true" class="navbar-burger__line"></span>
-  </a>
-  <nav class="nav">
-    <ul class="nav__list" id="navMenu">
-      
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/"
-              
-              title=""
-              >Blog</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/categories"
-              
-              title=""
-              >Categories</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/tags"
-              
-              title=""
-              >Tags</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/about"
-              
-              title=""
-              >About</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/blogroll"
-              
-              title=""
-              >Blogroll</a
-            >
-          </li>
-
-        
-
-
-      
+    <li class="main-nav__item"><a class="nav-main-item active" href="/blog/" title="Blogs">Blogs</a></li>
+    
     </ul>
-    <ul class="nav__list nav__list--end">
-      
-      
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
+</nav>
 
-      
-    </ul>
-  </nav>
-</div>
 </header>
-  <div
-    class="post 
-      animated fadeInDown
 
-    "
-  >
-    
-    <div class="post__content">
-      <h1>Use Systemd in Docker Container</h1>
-      <h1 id="use-systemd-in-docker-container">Use systemd in docker container</h1>
+            <section class="page__body">
+    <header class="content__header">
+        <h1>Use Systemd in Docker Container</h1>
+    </header>
+    <div class="content__body">
+        <h1 id="use-systemd-in-docker-container">Use systemd in docker container</h1>
 <p>公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。</p>
 <h1 id="solution">Solution</h1>
 <p>通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#b44"> centos:7</span><span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">ENV</span> container docker<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install systemd; yum clean all;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> <span style="color:#666">(</span><span style="color:#a2f">cd</span> /lib/systemd/system/sysinit.target.wants/; <span style="color:#a2f;font-weight:bold">for</span> i in ; <span style="color:#a2f;font-weight:bold">do</span> <span style="color:#666">[</span> <span style="color:#b8860b">$i</span> <span style="color:#666">==</span> systemd-tmpfiles-setup.service <span style="color:#666">]</span> <span style="color:#666">||</span> rm -f <span style="color:#b8860b">$i</span>; <span style="color:#a2f;font-weight:bold">done</span><span style="color:#666">)</span>;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/multi-user.target.wants/;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /etc/systemd/system/.wants/;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/local-fs.target.wants/;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/udev;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/initctl;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/basic.target.wants/;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> rm -rf /lib/systemd/system/anaconda.target.wants/*;<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">VOLUME</span> [ <span style="color:#b44">&#34;/sys/fs/cgroup&#34;</span> ] <span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install gcc<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install epel-release<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">RUN</span> yum -y install snapd<span style="">
-</span><span style=""></span><span style="color:#a2f;font-weight:bold">CMD</span> [<span style="color:#b44">&#34;/usr/sbin/init&#34;</span>]<span style="">
-</span></code></pre></div><p>在Docker目录的同级目录下面执行docker build -t dev .<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> centos:7</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> container docker<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum -y install systemd; yum clean all;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> <span style="color:#f92672">(</span>cd /lib/systemd/system/sysinit.target.wants/; <span style="color:#66d9ef">for</span> i in ; <span style="color:#66d9ef">do</span> <span style="color:#f92672">[</span> $i <span style="color:#f92672">==</span> systemd-tmpfiles-setup.service <span style="color:#f92672">]</span> <span style="color:#f92672">||</span> rm -f $i; <span style="color:#66d9ef">done</span><span style="color:#f92672">)</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /lib/systemd/system/multi-user.target.wants/;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /etc/systemd/system/.wants/;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /lib/systemd/system/local-fs.target.wants/;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/udev;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /lib/systemd/system/sockets.target.wants/initctl;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /lib/systemd/system/basic.target.wants/;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> rm -rf /lib/systemd/system/anaconda.target.wants/*;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">VOLUME</span> [ <span style="color:#e6db74">&#34;/sys/fs/cgroup&#34;</span> ] <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum -y install gcc<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum -y install epel-release<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum -y install snapd<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/usr/sbin/init&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>在Docker目录的同级目录下面执行docker build -t dev .<br>
 我们在执行完之后去执行docker run -itd &ndash;name container01 &ndash;privileged=true dev /sbin/init 启动容器<br>
 使用docker exec -ti container01 bash进入容器的交互shell,执行systemctl status snapd如果没有报错那么恭喜你，成功地在容器下面使用了systemd,安装ccls可以参考下图中地命令
-<img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/systemd-in-docker-container.png" alt="&ldquo;systemd and ccls&rdquo;"></p>
-</div>
-    <div class="post__footer">
-      
-        <span><a class="category" href="/categories/linux/">Linux</a></span>
+<img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/systemd-in-docker-container.png" alt="&amp;ldquo;systemd and ccls&amp;rdquo;"></p>
 
-
-
-
-      
-
-      
-        <span><a class="tag" href="/tags/linux/">Linux</a><a class="tag" href="/tags/docker/">Docker</a></span>
-
-
-
-
-      
     </div>
+    <footer class="content__footer"></footer>
 
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://treeboylife.com/images/avatar.jpeg" alt="Logo">
+<h1 class="about__title">Lofi&amp;Cafe</h1>
+<p class="about__description">Blog about tech and life!</p>
+</div>
+
+
+<ul class="aside__social-links">
     
-  </div>
-
-
-      </main>
-    </div><footer class="footer footer__base">
-  <ul class="footer__list">
-    <li class="footer__item">
-      &copy;
-      
-        LofiCafe
-        2022
-
-
-      
+    <li>
+        <a href="https://github.com/lofiCafe" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
     </li>
     
-  </ul>
+    <li>
+        <a href="mailto:tingjeremypriv@gmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2021-08-03
+        </p>
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p class="copyright">© 2022 loficafe</p>
+<p class="advertisement">Powered by <a href="https://gohugo.io/">hugo</a> and <a href="https://github.com/joeroe/risotto">risotto</a>.</p>
 </footer>
-  
-  <script
-    type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
-    crossorigin="anonymous"
-  ></script></body>
+
+        </div>
+    </body>
+
 </html>

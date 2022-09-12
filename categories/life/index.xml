@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Life on LofiCafe&#39;s Blog</title>
+    <title>Life on Lofi Cafe</title>
     <link>https://treeboylife.com/categories/life/</link>
-    <description>Recent content in Life on LofiCafe&#39;s Blog</description>
+    <description>Recent content in Life on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>© 2022 loficafe</copyright>
     <lastBuildDate>Fri, 29 Jan 2021 22:30:51 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Migrating Blog to Github Pages</title>
@@ -13,9 +14,7 @@
       <pubDate>Fri, 29 Jan 2021 22:30:51 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/migrate-blog-to-github-pages/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
   </channel>

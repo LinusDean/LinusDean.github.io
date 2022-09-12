@@ -1,423 +1,49 @@
 <!DOCTYPE html>
-<html
-  dir="ltr"
-  lang="en"
-  data-theme=""
-  class="html"
-><head>
-  <title>
-    LofiCafe
-        |
-        Onwership in Rust
+<html lang="en">
 
+    <head><title>Onwership in Rust &ndash; Lofi Cafe</title>
+<meta name="description" content="Blog about tech and life!">
 
-      
-
-
-    
-
-  </title>
-
-  
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.84.4" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="author" content="LofiCafe" />
-  <meta
-    name="description"
-    content="Blog about tech and life"
-  />
-  
-  
-    
-    
-    <link
-      rel="stylesheet"
-      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
-      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
-      crossorigin="anonymous"
-      type="text/css"
-    />
-
-  
-
-  
-  <link
-    rel="stylesheet"
-    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
-    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
-    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
-    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
-    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
-    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-
-  <link rel="canonical" href="https://treeboylife.com/blog/onwership-in-rust/" />
-
-  
-  
-  
-  
-  <script
-    type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
-    crossorigin="anonymous"
-  ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
-
-  
-
-  
-
-
-  
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Onwership in Rust"/>
-<meta name="twitter:description" content="什么是所有权？ Rust的核心特性就是所有权。
-所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。
- 带有垃圾回收机制例如Java、C#，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。 程序员显示地分配和释放内存，例如C/C&#43;&#43;语言。  Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。
-Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言里，一个值在stack上还是heap上对语言的行为和你为什么要做某些决定时存在更大影响的。
-存储数据  Stack （后进先出 LIFO Last in first out）  栈上添加数据为压入栈 栈上移除数据为弹出栈   所有存储在Stack上的数据必须拥有已知的固定的大小  编译时大小未知的数据或者运行时可能发生变化的数据必须存放在heap上   Heap对于内存的组织性差一些  当把数据放入到heap时，会请求一定数量的空间 操作系统在heap里找到一块足够大的空间，把它标记为在用，并返回一个指针，也就是这个空间的地址 这个过程就叫做在heap上分配    把值push到stack上不叫分配，因为指针ptr是已知固定大小的，可以把指针存放在stack上。如果你想访问实际的数据，你必须使用指针来定位
- The size of a pointer is not fixed. It depends upon different issues like operating system, CPU architecture etc. Usually it depends upon the word size of underlying processor for example a 32 bit computer the pointer size can be 4 bytes."/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
 
 
 
-  
-  <meta property="og:title" content="Onwership in Rust" />
-<meta property="og:description" content="什么是所有权？ Rust的核心特性就是所有权。
-所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。
- 带有垃圾回收机制例如Java、C#，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。 程序员显示地分配和释放内存，例如C/C&#43;&#43;语言。  Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。
-Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言里，一个值在stack上还是heap上对语言的行为和你为什么要做某些决定时存在更大影响的。
-存储数据  Stack （后进先出 LIFO Last in first out）  栈上添加数据为压入栈 栈上移除数据为弹出栈   所有存储在Stack上的数据必须拥有已知的固定的大小  编译时大小未知的数据或者运行时可能发生变化的数据必须存放在heap上   Heap对于内存的组织性差一些  当把数据放入到heap时，会请求一定数量的空间 操作系统在heap里找到一块足够大的空间，把它标记为在用，并返回一个指针，也就是这个空间的地址 这个过程就叫做在heap上分配    把值push到stack上不叫分配，因为指针ptr是已知固定大小的，可以把指针存放在stack上。如果你想访问实际的数据，你必须使用指针来定位
- The size of a pointer is not fixed. It depends upon different issues like operating system, CPU architecture etc. Usually it depends upon the word size of underlying processor for example a 32 bit computer the pointer size can be 4 bytes." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://treeboylife.com/blog/onwership-in-rust/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2021-11-26T15:00:51+08:00" />
-<meta property="article:modified_time" content="2021-11-26T15:00:51+08:00" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
 
 
-  
-  
-  
-  
-  <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "articleSection": "blog",
-        "name": "Onwership in Rust",
-        "headline": "Onwership in Rust",
-        "alternativeHeadline": "",
-        "description": "
-      
-        什么是所有权？ Rust的核心特性就是所有权。\n所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。\n 带有垃圾回收机制例如Java、C#，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。 程序员显示地分配和释放内存，例如C\/C\u002b\u002b语言。  Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。\nStack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言里，一个值在stack上还是heap上对语言的行为和你为什么要做某些决定时存在更大影响的。\n存储数据  Stack （后进先出 LIFO Last in first out）  栈上添加数据为压入栈 栈上移除数据为弹出栈   所有存储在Stack上的数据必须拥有已知的固定的大小  编译时大小未知的数据或者运行时可能发生变化的数据必须存放在heap上   Heap对于内存的组织性差一些  当把数据放入到heap时，会请求一定数量的空间 操作系统在heap里找到一块足够大的空间，把它标记为在用，并返回一个指针，也就是这个空间的地址 这个过程就叫做在heap上分配    把值push到stack上不叫分配，因为指针ptr是已知固定大小的，可以把指针存放在stack上。如果你想访问实际的数据，你必须使用指针来定位\n The size of a pointer is not fixed. It depends upon different issues like operating system, CPU architecture etc. Usually it depends upon the word size of underlying processor for example a 32 bit computer the pointer size can be 4 bytes.
-
-
-      
-
-
-    ",
-        "inLanguage": "en-us",
-        "isFamilyFriendly": "true",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/treeboylife.com\/blog\/onwership-in-rust\/"
-        },
-        "author" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "creator" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "accountablePerson" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "copyrightHolder" : {
-            "@type": "Person",
-            "name": "LofiCafe"
-        },
-        "copyrightYear" : "2021",
-        "dateCreated": "2021-11-26T15:00:51.00Z",
-        "datePublished": "2021-11-26T15:00:51.00Z",
-        "dateModified": "2021-11-26T15:00:51.00Z",
-        "publisher":{
-            "@type":"Organization",
-            "name": "LofiCafe",
-            "url": "https://treeboylife.com",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https:\/\/treeboylife.comfavicon-32x32.png",
-                "width":"32",
-                "height":"32"
-            }
-        },
-        "image": 
-      [
-      ]
-
-    ,
-        "url" : "https:\/\/treeboylife.com\/blog\/onwership-in-rust\/",
-        "wordCount" : "207",
-        "genre" : [ 
-      
-      "2021"
-
-    
-      
-        ,
-
-      
-      "Rust"
-
-    ],
-        "keywords" : [ 
-      
-      "Rust"
-
-    ]
-    }
-  </script>
-
-
-
+<link rel="stylesheet" href="https://treeboylife.com/css/colour/gruvbox-dark.css">
+<link rel="stylesheet" href="https://treeboylife.com/css/colour/dark-mode.css">
+<link rel="stylesheet" href="https://treeboylife.com/css/risotto.css">
+<link rel="stylesheet" href="https://treeboylife.com/css/custom.css">
 </head>
-<body
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><h1 class="page__logo"><a href="https://treeboylife.com" class="page__logo-inner">Lofi Cafe</a></h1>
+<nav class="page__nav main-nav">
+    <ul>
     
-      class="body theme--light"
-
     
-  >
-    <div class="wrapper">
-      <aside
-        
-          class="wrapper__sidebar"
-
-        
-      ><div
-  class="sidebar
-    animated fadeInDown
-
-  "
->
-  <div class="sidebar__content">
-    <div class="sidebar__introduction">
-      <img
-        class="sidebar__introduction-profileimage"
-        src="/"
-        alt="profile picture"
-      />
-      
-        <div class="sidebar__introduction-title">
-          <a href="/"></a>
-        </div>
-
-      
-      <div class="sidebar__introduction-description">
-        <p>Blog about tech and life</p>
-      </div>
-    </div>
-    <ul class="sidebar__list">
-      
-    </ul>
-  </div><footer class="footer footer__sidebar">
-  <ul class="footer__list">
-    <li class="footer__item">
-      &copy;
-      
-        LofiCafe
-        2022
-
-
-      
-    </li>
+    <li class="main-nav__item"><a class="nav-main-item" href="/about/" title="">About</a></li>
     
-  </ul>
-</footer>
-  
-  <script
-    type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
-    crossorigin="anonymous"
-  ></script></div>
-</aside>
-      <main
-        
-          class="wrapper__main"
-
-        
-      >
-        <header class="header"><div
-  class="
-    animated fadeInDown
-
-  "
->
-  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-    <span aria-hidden="true" class="navbar-burger__line"></span>
-    <span aria-hidden="true" class="navbar-burger__line"></span>
-    <span aria-hidden="true" class="navbar-burger__line"></span>
-  </a>
-  <nav class="nav">
-    <ul class="nav__list" id="navMenu">
-      
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/"
-              
-              title=""
-              >Blog</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/categories"
-              
-              title=""
-              >Categories</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/tags"
-              
-              title=""
-              >Tags</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/about"
-              
-              title=""
-              >About</a
-            >
-          </li>
-
-        
-
-
-      
-        
-        
-          <li class="nav__list-item">
-            <a
-              
-              href="/blogroll"
-              
-              title=""
-              >Blogroll</a
-            >
-          </li>
-
-        
-
-
-      
+    <li class="main-nav__item"><a class="nav-main-item active" href="/blog/" title="Blogs">Blogs</a></li>
+    
     </ul>
-    <ul class="nav__list nav__list--end">
-      
-      
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
+</nav>
 
-      
-    </ul>
-  </nav>
-</div>
 </header>
-  <div
-    class="post 
-      animated fadeInDown
 
-    "
-  >
-    
-    <div class="post__content">
-      <h1>Onwership in Rust</h1>
-      <h1 id="什么是所有权">什么是所有权？</h1>
+            <section class="page__body">
+    <header class="content__header">
+        <h1>Onwership in Rust</h1>
+    </header>
+    <div class="content__body">
+        <h1 id="什么是所有权">什么是所有权？</h1>
 <p>Rust的核心特性就是所有权。</p>
 <p>所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。</p>
 <ul>
@@ -493,23 +119,23 @@ Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言�
 </ul>
 <h3 id="变量作用域">变量作用域</h3>
 <p>Scope就是程序中一个项目的有效范围，例如</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a2f;font-weight:bold">fn</span> <span style="color:#00a000">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#080;font-style:italic">// s 不可用
-</span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#b44">&#34;Hello&#34;</span>;<span style="color:#080;font-style:italic">// s可用
-</span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">                  </span><span style="color:#080;font-style:italic">// 可以对s进行相关操作
-</span><span style="color:#080;font-style:italic"></span>}<span style="color:#080;font-style:italic">// s作用域到此结束，s不再可用
-</span></code></pre></div><h3 id="以复杂的string类型讲所有权">以复杂的String类型讲所有权</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// s 不可用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello&#34;</span>;<span style="color:#75715e">// s可用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                  <span style="color:#75715e">// 可以对s进行相关操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}<span style="color:#75715e">// s作用域到此结束，s不再可用
+</span></span></span></code></pre></div><h3 id="以复杂的string类型讲所有权">以复杂的String类型讲所有权</h3>
 <p>String类型（存储在堆上的）比基础标量数据类型更复杂，来看看Rust是如何处理它的</p>
 <h4 id="创建string类型的值">创建String类型的值</h4>
 <p>可以使用from函数从字符串字面值创建出String类型，例如<code>let s = String::from(&quot;Hello&quot;);</code></p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a2f;font-weight:bold">fn</span> <span style="color:#00a000">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">mut</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#a2f">String</span>::from(<span style="color:#b44">&#34;Hello&#34;</span>);<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">// mut(即mutable)代表 s是可以修改的
-</span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">  
-</span><span style="color:#bbb">  </span>s.push_str(<span style="color:#b44">&#34;, World&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">  
-</span><span style="color:#bbb">  </span>println<span style="color:#666">!</span>(<span style="color:#b44">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>s);<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span></code></pre></div><h4 id="内存和分配">内存和分配</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>); <span style="color:#75715e">// mut(即mutable)代表 s是可以修改的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  
+</span></span><span style="display:flex;"><span>  s.push_str(<span style="color:#e6db74">&#34;, World&#34;</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  println!(<span style="color:#e6db74">&#34;{}&#34;</span>, s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="内存和分配">内存和分配</h4>
 <ul>
 <li>字符串字面值，在编译时就知道它的内容了，其文本内容直接被硬编码到最终的可执行文件里，速度快、高效（得益于其不可变性）</li>
 <li>String类型，为了支持可变性，需要在heap上分配内存来保存编译时未知的文本内容
@@ -542,30 +168,30 @@ Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言�
 <li>一个长度len</li>
 <li>一个容量capacity</li>
 </ul>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a2f;font-weight:bold">fn</span> <span style="color:#00a000">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>s1<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#a2f">String</span>::from(<span style="color:#b44">&#34;Hello&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>s2<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>s1;<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>prinln<span style="color:#666">!</span>(<span style="color:#b44">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>s1);<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">// 会报错， borrow of moved value: &#39;s1&#39;,
-</span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">  									</span><span style="color:#080;font-style:italic">// move occurs because `s1` has type &#39;std::string::String&#39;, which does not implement the &#39;Copy&#39; trait
-</span><span style="color:#080;font-style:italic"></span>}<span style="color:#bbb">
-</span></code></pre></div><p>为了保证内存的安全，在上面的代码中，当s1移动到s2后，Rust会让s1失效。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1;
+</span></span><span style="display:flex;"><span>  prinln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, s1); <span style="color:#75715e">// 会报错， borrow of moved value: &#39;s1&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  									<span style="color:#75715e">// move occurs because `s1` has type &#39;std::string::String&#39;, which does not implement the &#39;Copy&#39; trait
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>为了保证内存的安全，在上面的代码中，当s1移动到s2后，Rust会让s1失效。</p>
 <p>Rust中一个设计原则： Rust不会自动创建数据的深拷贝。</p>
 <h4 id="变量和数据交互的方式-克隆clone">变量和数据交互的方式： 克隆（Clone）</h4>
 <p>如果真想对heap上面的String数据进行深度拷贝，而不仅仅是stack上的数据，可以使用clone方法。</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a2f;font-weight:bold">fn</span> <span style="color:#00a000">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>s1<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#a2f">String</span>::from(<span style="color:#b44">&#34;Hello&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>s2<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>s1.clone();<span style="color:#bbb">
-</span><span style="color:#bbb">  
-</span><span style="color:#bbb">  </span>println<span style="color:#666">!</span>(<span style="color:#b44">&#34;{}, {}&#34;</span>,<span style="color:#bbb"> </span>s1,<span style="color:#bbb"> </span>s2);<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span></code></pre></div><p>克隆方法相当于是将stack和heap上的数据都完整拷贝了一份，clone这种方法是比较消耗资源的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1.clone();
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  println!(<span style="color:#e6db74">&#34;{}, {}&#34;</span>, s1, s2);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>克隆方法相当于是将stack和heap上的数据都完整拷贝了一份，clone这种方法是比较消耗资源的。</p>
 <h4 id="stack上的数据-复制">Stack上的数据： 复制</h4>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a2f;font-weight:bold">fn</span> <span style="color:#00a000">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#666">5</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>x;<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>println<span style="color:#666">!</span>(<span style="color:#b44">&#34;{}, {}&#34;</span>,<span style="color:#bbb"> </span>x,<span style="color:#bbb"> </span>y);<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">// x是整型，为标量类型，在编译的时就确定了大小
-</span><span style="color:#080;font-style:italic"></span>}<span style="color:#bbb">
-</span></code></pre></div><p>Copy trait,可以用于像整数这样完全存放在stack上面的类型，如果一个类型实现了Copy这个trait，那么旧的变量在赋值后仍然可用，如果一个类型或者该类型的一部分实现了Drop trait，那么Rust不允许让它再去实现Copy trait了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>  println!(<span style="color:#e6db74">&#34;{}, {}&#34;</span>, x, y); <span style="color:#75715e">// x是整型，为标量类型，在编译的时就确定了大小
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Copy trait,可以用于像整数这样完全存放在stack上面的类型，如果一个类型实现了Copy这个trait，那么旧的变量在赋值后仍然可用，如果一个类型或者该类型的一部分实现了Drop trait，那么Rust不允许让它再去实现Copy trait了</p>
 <h4 id="一些拥有copy-trait的类型">一些拥有Copy Trait的类型</h4>
 <ul>
 <li>任何简单标量的组合类型都可以是Copy的</li>
@@ -580,49 +206,51 @@ Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言�
 </ul>
 </li>
 </ul>
-</div>
-    <div class="post__footer">
-      
-        <span><a class="category" href="/categories/2021/">2021</a><a class="category" href="/categories/rust/">Rust</a></span>
 
-
-
-
-      
-
-      
-        <span><a class="tag" href="/tags/rust/">Rust</a></span>
-
-
-
-
-      
     </div>
+    <footer class="content__footer"></footer>
 
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://treeboylife.com/images/avatar.jpeg" alt="Logo">
+<h1 class="about__title">Lofi&amp;Cafe</h1>
+<p class="about__description">Blog about tech and life!</p>
+</div>
+
+
+<ul class="aside__social-links">
     
-  </div>
-
-
-      </main>
-    </div><footer class="footer footer__base">
-  <ul class="footer__list">
-    <li class="footer__item">
-      &copy;
-      
-        LofiCafe
-        2022
-
-
-      
+    <li>
+        <a href="https://github.com/lofiCafe" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
     </li>
     
-  </ul>
+    <li>
+        <a href="mailto:tingjeremypriv@gmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2021-11-26
+        </p>
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p class="copyright">© 2022 loficafe</p>
+<p class="advertisement">Powered by <a href="https://gohugo.io/">hugo</a> and <a href="https://github.com/joeroe/risotto">risotto</a>.</p>
 </footer>
-  
-  <script
-    type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
-    crossorigin="anonymous"
-  ></script></body>
+
+        </div>
+    </body>
+
 </html>

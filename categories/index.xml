@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on LofiCafe&#39;s Blog</title>
+    <title>Categories on Lofi Cafe</title>
     <link>https://treeboylife.com/categories/</link>
-    <description>Recent content in Categories on LofiCafe&#39;s Blog</description>
+    <description>Recent content in Categories on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>© 2022 loficafe</copyright>
     <lastBuildDate>Mon, 12 Sep 2022 15:43:34 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2021</title>
@@ -13,9 +14,7 @@
       <pubDate>Mon, 12 Sep 2022 15:43:34 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/2021/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -24,9 +23,7 @@
       <pubDate>Mon, 12 Sep 2022 15:43:34 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/rust/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -35,9 +32,7 @@
       <pubDate>Sun, 10 Jul 2022 15:32:58 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/leetcode/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -46,9 +41,7 @@
       <pubDate>Sat, 09 Jul 2022 16:11:32 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/c&#43;&#43;/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -57,9 +50,7 @@
       <pubDate>Sun, 15 Aug 2021 19:54:37 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/tmux/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -68,9 +59,7 @@
       <pubDate>Sun, 15 Aug 2021 19:54:37 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/vim/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -79,9 +68,7 @@
       <pubDate>Tue, 03 Aug 2021 14:52:27 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/linux/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -90,9 +77,7 @@
       <pubDate>Fri, 16 Jul 2021 20:36:00 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/ts/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -101,9 +86,7 @@
       <pubDate>Mon, 08 Mar 2021 19:33:30 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/optimizer/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
     <item>
@@ -112,9 +95,7 @@
       <pubDate>Fri, 29 Jan 2021 22:30:51 +0800</pubDate>
       
       <guid>https://treeboylife.com/categories/life/</guid>
-      
-        <description></description>
-      
+      <description></description>
     </item>
     
   </channel>

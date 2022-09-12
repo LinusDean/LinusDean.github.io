@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>easy on LofiCafe&#39;s Blog</title>
+    <title>easy on Lofi Cafe</title>
     <link>https://treeboylife.com/tags/easy/</link>
-    <description>Recent content in easy on LofiCafe&#39;s Blog</description>
+    <description>Recent content in easy on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>© 2022 loficafe</copyright>
     <lastBuildDate>Sat, 17 Apr 2021 20:09:44 +0800</lastBuildDate><atom:link href="https://treeboylife.com/tags/easy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Leetcode_easy_twosum</title>
@@ -13,10 +14,8 @@
       <pubDate>Sat, 17 Apr 2021 20:09:44 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/leetcode_easy_twosum/</guid>
-      
-        <description>Two Sum Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+      <description>Two Sum Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 Solution brute-force class Solution { public: vector&amp;lt;int&amp;gt; twoSum(vector&amp;lt;int&amp;gt;&amp;amp; nums, int target) { for(int i=0; i &amp;lt; nums.size(); ++i) { int left = target - nums[i]; for(int j=i+1; j &amp;lt; nums.size(); j++) { if(nums[j] == left) { return {i, j}; } } } return {}; } }; hashmap class Solution { public: vector&amp;lt;int&amp;gt; twoSum(vector&amp;lt;int&amp;gt;&amp;amp; nums, int target) { unordered_map&amp;lt;int, int&amp;gt; indices; for(int i=0; i &amp;lt; nums.</description>
-      
     </item>
     
   </channel>
