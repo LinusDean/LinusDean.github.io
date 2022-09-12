@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rust on Dean&#39;s Blog</title>
+    <title>Rust on LofiCafe&#39;s Blog</title>
     <link>https://treeboylife.com/categories/rust/</link>
-    <description>Recent content in Rust on Dean&#39;s Blog</description>
+    <description>Recent content in Rust on LofiCafe&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Nov 2021 15:00:51 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Sep 2022 15:43:34 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sturct in Rust</title>
+      <link>https://treeboylife.com/blog/struct-in-rust/</link>
+      <pubDate>Mon, 12 Sep 2022 15:43:34 +0800</pubDate>
+      
+      <guid>https://treeboylife.com/blog/struct-in-rust/</guid>
+      
+        <description>结构体 在Rust语言中，我们可以使用和C/C++一样的关键字struct去声明一个结构体
+结构体声明 假设我们需要声明一个方形解构，可以在Rust中使用以下声明
+struct Rectangle{width: u32,height: u32,}初始化一个实例 // 不可变实例 letrect1=Rectangle{width: 30,height: 60,};// 可变 letmutrect2=Rectangle{width: 30,height: 60,};访问结构体成员 println!(&amp;#34;height: {}, width: {}&amp;#34;,rect1.width,rect1.height);直接打印结构体 我们不能直接使用**println!**这个宏去打印结构体。需要对结构体进行修改，添加注解，如下
+#[derive(Debug)]struct Rectangle{width: u32,height: u32,}println!(&amp;#34;rect1: {:#?}&amp;#34;,rect1);方法 方法与函数十分类似：它们都使用fn关键字以及一个名称来声明；它们都可以拥有参数和返回值；另外，它们都包含了一段在调用时执行的代码。方法总是被定义在某个结构体（或者枚举类型、trait对象）并且它们的第一个参数永远都是self，用于指代调用该方法的结构体实例
+implRectangle{fn area(&amp;amp;self)-&amp;gt; u32 {self.width*self.height}}// 调用 rect1.area();方法也可以传入多个参数，假设我们想实现一个方法去判断一个方形是否能容纳另外一个方形解构，如下
+implRectangle{fn can_hold(&amp;amp;self,other: &amp;amp;Rectangle){self.width&amp;gt;other.width&amp;amp;&amp;amp;self.height&amp;gt;other.height}}// 调用方式 letrect2=Rectangle{width: 300,height: 5000,};rect1.can_hold(&amp;amp;rect2);关联函数 除了方法，impl块还允许我们定义不用接收self作为参数的函数。由于这类函数与结构体互相关联，所以它们也被称为关联函数（associated function）。我们将其命名为函数而不是方法，是因为它们不会作用于某个具体的结构体实例，我们之前在Rust中使用的String::from就是关联函数的一种。关联函数常常被用作构造器来返回一个结构体的新实例。
+implRectangle{fn square(size: u32)-&amp;gt; Rectangle{Rectangle{width: size,height: size}}}// 调用 letsq=Rectangle::square(3);</description>
+      
+    </item>
+    
     <item>
       <title>Onwership in Rust</title>
       <link>https://treeboylife.com/blog/onwership-in-rust/</link>
       <pubDate>Fri, 26 Nov 2021 15:00:51 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/onwership-in-rust/</guid>
-      <description>什么是所有权？ Rust的核心特性就是所有权。
+      
+        <description>什么是所有权？ Rust的核心特性就是所有权。
 所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。
  带有垃圾回收机制例如Java、C#，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。 程序员显示地分配和释放内存，例如C/C++语言。  Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。
 Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言里，一个值在stack上还是heap上对语言的行为和你为什么要做某些决定时存在更大影响的。
 存储数据  Stack （后进先出 LIFO Last in first out）  栈上添加数据为压入栈 栈上移除数据为弹出栈   所有存储在Stack上的数据必须拥有已知的固定的大小  编译时大小未知的数据或者运行时可能发生变化的数据必须存放在heap上   Heap对于内存的组织性差一些  当把数据放入到heap时，会请求一定数量的空间 操作系统在heap里找到一块足够大的空间，把它标记为在用，并返回一个指针，也就是这个空间的地址 这个过程就叫做在heap上分配    把值push到stack上不叫分配，因为指针ptr是已知固定大小的，可以把指针存放在stack上。如果你想访问实际的数据，你必须使用指针来定位
  The size of a pointer is not fixed. It depends upon different issues like operating system, CPU architecture etc. Usually it depends upon the word size of underlying processor for example a 32 bit computer the pointer size can be 4 bytes.</description>
+      
     </item>
     
     <item>
@@ -27,8 +46,10 @@ Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言�
       <pubDate>Sat, 24 Jul 2021 20:20:45 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/comments-in-rust/</guid>
-      <description>Rust语言中的注释 任何语言都需要注释，Rust语言提供几个不同的注释方式
+      
+        <description>Rust语言中的注释 任何语言都需要注释，Rust语言提供几个不同的注释方式
  普通的注释  // 一些注释 /* 块注释 */ # 下面是文档的注释，可以被parse到HTML的库文档中 /// 生成库文档 //! </description>
+      
     </item>
     
     <item>
@@ -37,9 +58,11 @@ Stack (栈内存) vs Heap (堆内存) 在像Rust这样的系统级编程语言�
       <pubDate>Sat, 24 Jul 2021 20:09:54 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/hello-world-rust/</guid>
-      <description>Hello World Rust 语言中最简单的一个Hello World程序
+      
+        <description>Hello World Rust 语言中最简单的一个Hello World程序
 fn main(){println!(&amp;#34;Hello Rust!&amp;#34;);}在Rust中println!是一个宏(Marco)用于输出字符串
 rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</description>
+      
     </item>
     
   </channel>

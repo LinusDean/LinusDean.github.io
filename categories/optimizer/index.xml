@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Optimizer on Dean&#39;s Blog</title>
+    <title>Optimizer on LofiCafe&#39;s Blog</title>
     <link>https://treeboylife.com/categories/optimizer/</link>
-    <description>Recent content in Optimizer on Dean&#39;s Blog</description>
+    <description>Recent content in Optimizer on LofiCafe&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Mar 2021 19:33:30 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/optimizer/index.xml" rel="self" type="application/rss+xml" />
@@ -13,10 +13,12 @@
       <pubDate>Mon, 08 Mar 2021 19:33:30 +0800</pubDate>
       
       <guid>https://treeboylife.com/blog/ipopt-build/</guid>
-      <description>What is Ipopt Ipopt (Interior Point Optimizer) is an open source software package for large-scale nonlinear optimization. You can find the official documentation HERE.
+      
+        <description>What is Ipopt Ipopt (Interior Point Optimizer) is an open source software package for large-scale nonlinear optimization. You can find the official documentation HERE.
 How to Buid It The Ipopt relies some dependencies. Make sure install them first.
  LAPACK (Linear Algebra Package) HSL (Harwell Subroutines Library) ThirdParty-HSL  Compile And Install LAPACK First we need to download the source code and compile to dynamic shared library.
 wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz The LAPACK is compiled to static library by default with unmodified rule, we need to change the 45th line of CMakeLists.</description>
+      
     </item>
     
   </channel>

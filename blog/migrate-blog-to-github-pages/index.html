@@ -1,63 +1,459 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Migrating Blog to Github Pages | Dean&#39;s Blog</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    
-  </head>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    LofiCafe
+        |
+        Migrating Blog to Github Pages
 
-  <body>
-    <nav>
-    <ul class="menu">
+
       
-      <li><a href="/">Blog</a></li>
+
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.84.4" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="LofiCafe" />
+  <meta
+    name="description"
+    content="Blog about tech and life"
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
+      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://treeboylife.com/blog/migrate-blog-to-github-pages/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Migrating Blog to Github Pages"/>
+<meta name="twitter:description" content=""/>
+
+
+
+  
+  <meta property="og:title" content="Migrating Blog to Github Pages" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://treeboylife.com/blog/migrate-blog-to-github-pages/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-01-29T22:30:51+08:00" />
+<meta property="article:modified_time" content="2021-01-29T22:30:51+08:00" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "blog",
+        "name": "Migrating Blog to Github Pages",
+        "headline": "Migrating Blog to Github Pages",
+        "alternativeHeadline": "",
+        "description": "
       
-      <li><a href="/categories">Categories</a></li>
+        
+
+
       
-      <li><a href="/tags">Tags</a></li>
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/treeboylife.com\/blog\/migrate-blog-to-github-pages\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "copyrightYear" : "2021",
+        "dateCreated": "2021-01-29T22:30:51.00Z",
+        "datePublished": "2021-01-29T22:30:51.00Z",
+        "dateModified": "2021-01-29T22:30:51.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "LofiCafe",
+            "url": "https://treeboylife.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/treeboylife.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/treeboylife.com\/blog\/migrate-blog-to-github-pages\/",
+        "wordCount" : "63",
+        "genre" : [ 
       
-      <li><a href="/about">About</a></li>
+      "Life"
+
+    
       
-      <li><a href="/blogroll">Blogroll</a></li>
+        ,
+
+      
+      "2021"
+
+    ],
+        "keywords" : [ 
+      
+      "Life"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/"></a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Blog about tech and life</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
       
     </ul>
-    <hr/>
-    </nav>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        LofiCafe
+        2022
 
-<div class="article-meta">
-<h1><span class="title">Migrating Blog to Github Pages</span></h1>
 
-<h2 class="date">2021/01/29</h2>
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/categories"
+              
+              title=""
+              >Categories</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/tags"
+              
+              title=""
+              >Tags</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/about"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/blogroll"
+              
+              title=""
+              >Blogroll</a
+            >
+          </li>
+
+        
+
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
 </div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
 
-<main>
-<h1 id="new-journey">New Journey</h1>
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Migrating Blog to Github Pages</h1>
+      <h1 id="new-journey">New Journey</h1>
 <p>Considering that my original domain name <strong>mkernel.com</strong> of my blog is about to expire , I decide to
 blog on Github rather than WordPress which I have to pay extra ECS fee to build the site.
 I will blog my life and tech on this site and also transfer old post content to this site.
-Hello 2021! Hello Github again XD.</p>
-</main>
-<hr />
-<h1>Comments🎉</h1>
+Hello 2021! Hello Github again XD.</p></div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/life/">Life</a><a class="category" href="/categories/2021/">2021</a></span>
 
-<div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="5b549074-8206-4098-983b-d54bb541397a"
-  data-page-id="c3c7101ae8bdd71d839800b699e7a1b8"
-  data-page-url="https://treeboylife.com/blog/migrate-blog-to-github-pages/"
-  data-page-title="Migrating Blog to Github Pages"
-></div>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-  <footer>
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/life/">Life</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        LofiCafe
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
   
-  
-  <hr/>
-  © <a href="https://treeboylife.com">Nan Dean</a> 2016 &ndash; 2021
-  
-  </footer>
-  </body>
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></body>
 </html>
-

@@ -1,40 +1,437 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About Tmux and Vim | Dean&#39;s Blog</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    
-  </head>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    LofiCafe
+        |
+        About Tmux and Vim
 
-  <body>
-    <nav>
-    <ul class="menu">
+
       
-      <li><a href="/">Blog</a></li>
+
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.84.4" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="LofiCafe" />
+  <meta
+    name="description"
+    content="Blog about tech and life"
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
+      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://treeboylife.com/blog/about-tmux-and-vim/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="About Tmux and Vim"/>
+<meta name="twitter:description" content="记录以下最近使用Tmux的一些设置和Vim的一些小技巧 tmux tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等
+创建一个Session 我们可以使用tmux new session -s mysessionName 来创建一个Session，我在我的环境变量里将其设置了一个aliasalias tnew=&quot;tmux new session -s&quot;,这样子就可以直接使用tnew mysession直接创建一个新的session，不用敲那么多命令
+挂起当前Session 挂起当前的这个session可以使用组合键Ctrl&#43;b D(默认Control键加b然后按大写d)
+创建一个分屏  使用组合键Ctrl&#43;b &quot;用来创建一个Horizontal的pane 使用组合键Ctrl&#43;b %用来创建一个Vertical的pane  使用hjkl在不同的pane之间来回切换 这边我们需要修改以下tmux的配置文件 ~/.tmux.conf,这样子我们可以使用组合键Ctrl&#43;b hjkl来回切换
+bind h select-pane -L bind j select-pane -D bind k select-pane -U bind l select-pane -R 使用hjkl对pane进行resize 在tmux的配置文件中加入以下配置
+# 绑定Ctrl&#43;hjkl键为面板上下左右调整边缘的快捷指令 # 注意我们还是需要先按下Tmux的命令键 Ctrl&#43;b bind -r ^k resizep -U 10 # 绑定Ctrl&#43;k为往↑调整面板边缘10个单元格 bind -r ^j resizep -D 10 # 绑定Ctrl&#43;j为往↓调整面板边缘10个单元格 bind -r ^h resizep -L 10 # 绑定Ctrl&#43;h为往←调整面板边缘10个单元格 bind -r ^l resizep -R 10 # 绑定Ctrl&#43;l为往→调整面板边缘10个单元格 Vim中的宏 昨天在处理一些文本需要一些批量化的工作去做，例如我需要将以下的文本删除最前的时间字符，后面的字符是特定格式的，于是我就想着要不要用vim的宏去处理一下"/>
+
+
+
+  
+  <meta property="og:title" content="About Tmux and Vim" />
+<meta property="og:description" content="记录以下最近使用Tmux的一些设置和Vim的一些小技巧 tmux tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等
+创建一个Session 我们可以使用tmux new session -s mysessionName 来创建一个Session，我在我的环境变量里将其设置了一个aliasalias tnew=&quot;tmux new session -s&quot;,这样子就可以直接使用tnew mysession直接创建一个新的session，不用敲那么多命令
+挂起当前Session 挂起当前的这个session可以使用组合键Ctrl&#43;b D(默认Control键加b然后按大写d)
+创建一个分屏  使用组合键Ctrl&#43;b &quot;用来创建一个Horizontal的pane 使用组合键Ctrl&#43;b %用来创建一个Vertical的pane  使用hjkl在不同的pane之间来回切换 这边我们需要修改以下tmux的配置文件 ~/.tmux.conf,这样子我们可以使用组合键Ctrl&#43;b hjkl来回切换
+bind h select-pane -L bind j select-pane -D bind k select-pane -U bind l select-pane -R 使用hjkl对pane进行resize 在tmux的配置文件中加入以下配置
+# 绑定Ctrl&#43;hjkl键为面板上下左右调整边缘的快捷指令 # 注意我们还是需要先按下Tmux的命令键 Ctrl&#43;b bind -r ^k resizep -U 10 # 绑定Ctrl&#43;k为往↑调整面板边缘10个单元格 bind -r ^j resizep -D 10 # 绑定Ctrl&#43;j为往↓调整面板边缘10个单元格 bind -r ^h resizep -L 10 # 绑定Ctrl&#43;h为往←调整面板边缘10个单元格 bind -r ^l resizep -R 10 # 绑定Ctrl&#43;l为往→调整面板边缘10个单元格 Vim中的宏 昨天在处理一些文本需要一些批量化的工作去做，例如我需要将以下的文本删除最前的时间字符，后面的字符是特定格式的，于是我就想着要不要用vim的宏去处理一下" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://treeboylife.com/blog/about-tmux-and-vim/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-08-15T19:54:37+08:00" />
+<meta property="article:modified_time" content="2021-08-15T19:54:37+08:00" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "blog",
+        "name": "About Tmux and Vim",
+        "headline": "About Tmux and Vim",
+        "alternativeHeadline": "",
+        "description": "
       
-      <li><a href="/categories">Categories</a></li>
+        记录以下最近使用Tmux的一些设置和Vim的一些小技巧 tmux tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等\n创建一个Session 我们可以使用tmux new session -s mysessionName 来创建一个Session，我在我的环境变量里将其设置了一个aliasalias tnew=\u0026quot;tmux new session -s\u0026quot;,这样子就可以直接使用tnew mysession直接创建一个新的session，不用敲那么多命令\n挂起当前Session 挂起当前的这个session可以使用组合键Ctrl\u002bb D(默认Control键加b然后按大写d)\n创建一个分屏  使用组合键Ctrl\u002bb \u0026quot;用来创建一个Horizontal的pane 使用组合键Ctrl\u002bb %用来创建一个Vertical的pane  使用hjkl在不同的pane之间来回切换 这边我们需要修改以下tmux的配置文件 ~\/.tmux.conf,这样子我们可以使用组合键Ctrl\u002bb hjkl来回切换\nbind h select-pane -L bind j select-pane -D bind k select-pane -U bind l select-pane -R 使用hjkl对pane进行resize 在tmux的配置文件中加入以下配置\n# 绑定Ctrl\u002bhjkl键为面板上下左右调整边缘的快捷指令 # 注意我们还是需要先按下Tmux的命令键 Ctrl\u002bb bind -r ^k resizep -U 10 # 绑定Ctrl\u002bk为往↑调整面板边缘10个单元格 bind -r ^j resizep -D 10 # 绑定Ctrl\u002bj为往↓调整面板边缘10个单元格 bind -r ^h resizep -L 10 # 绑定Ctrl\u002bh为往←调整面板边缘10个单元格 bind -r ^l resizep -R 10 # 绑定Ctrl\u002bl为往→调整面板边缘10个单元格 Vim中的宏 昨天在处理一些文本需要一些批量化的工作去做，例如我需要将以下的文本删除最前的时间字符，后面的字符是特定格式的，于是我就想着要不要用vim的宏去处理一下
+
+
       
-      <li><a href="/tags">Tags</a></li>
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/treeboylife.com\/blog\/about-tmux-and-vim\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "copyrightYear" : "2021",
+        "dateCreated": "2021-08-15T19:54:37.00Z",
+        "datePublished": "2021-08-15T19:54:37.00Z",
+        "dateModified": "2021-08-15T19:54:37.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "LofiCafe",
+            "url": "https://treeboylife.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/treeboylife.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/treeboylife.com\/blog\/about-tmux-and-vim\/",
+        "wordCount" : "129",
+        "genre" : [ 
       
-      <li><a href="/about">About</a></li>
+      "2021"
+
+    
       
-      <li><a href="/blogroll">Blogroll</a></li>
+        ,
+
+      
+      "Vim"
+
+    
+      
+        ,
+
+      
+      "Tmux"
+
+    ],
+        "keywords" : [ 
+      
+      "Vim"
+
+    
+      
+        ,
+
+      
+      "Tmux"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/"></a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Blog about tech and life</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
       
     </ul>
-    <hr/>
-    </nav>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        LofiCafe
+        2022
 
-<div class="article-meta">
-<h1><span class="title">About Tmux and Vim</span></h1>
 
-<h2 class="date">2021/08/15</h2>
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/categories"
+              
+              title=""
+              >Categories</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/tags"
+              
+              title=""
+              >Tags</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/about"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/blogroll"
+              
+              title=""
+              >Blogroll</a
+            >
+          </li>
+
+        
+
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
 </div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
 
-<main>
-<h1 id="记录以下最近使用tmux的一些设置和vim的一些小技巧">记录以下最近使用Tmux的一些设置和Vim的一些小技巧</h1>
+    "
+  >
+    
+    <div class="post__content">
+      <h1>About Tmux and Vim</h1>
+      <h1 id="记录以下最近使用tmux的一些设置和vim的一些小技巧">记录以下最近使用Tmux的一些设置和Vim的一些小技巧</h1>
 <h2 id="tmux">tmux</h2>
 <p>tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等</p>
 <h3 id="创建一个session">创建一个Session</h3>
@@ -48,13 +445,13 @@
 </ul>
 <h3 id="使用hjkl在不同的pane之间来回切换">使用hjkl在不同的pane之间来回切换</h3>
 <p>这边我们需要修改以下tmux的配置文件 <code>~/.tmux.conf</code>,这样子我们可以使用组合键<code>Ctrl+b hjkl</code>来回切换</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#a2f">bind</span> h <span style="color:#a2f;font-weight:bold">select</span>-pane -L
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#a2f">bind</span> h <span style="color:#a2f;font-weight:bold">select</span>-pane -L
 <span style="color:#a2f">bind</span> j <span style="color:#a2f;font-weight:bold">select</span>-pane -D
 <span style="color:#a2f">bind</span> k <span style="color:#a2f;font-weight:bold">select</span>-pane -U
 <span style="color:#a2f">bind</span> l <span style="color:#a2f;font-weight:bold">select</span>-pane -R
 </code></pre></div><h3 id="使用hjkl对pane进行resize">使用hjkl对pane进行resize</h3>
 <p>在tmux的配置文件中加入以下配置</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#080;font-style:italic"># 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#080;font-style:italic"># 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span>
 <span style="color:#080;font-style:italic"># 注意我们还是需要先按下Tmux的命令键 Ctrl+b</span>
 <span style="color:#a2f">bind</span> -r ^k resizep -U <span style="color:#666">10</span> <span style="color:#080;font-style:italic"># 绑定Ctrl+k为往↑调整面板边缘10个单元格</span>
 <span style="color:#a2f">bind</span> -r ^j resizep -D <span style="color:#666">10</span> <span style="color:#080;font-style:italic"># 绑定Ctrl+j为往↓调整面板边缘10个单元格</span>
@@ -101,26 +498,49 @@ CSGDailyPowerSchedulePlanFor_xxxx.xml
 <li>使用<code>q</code>再次退出宏的录制</li>
 <li>使用<code>6@a</code>执行6次宏操作</li>
 </ol>
+</div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/2021/">2021</a><a class="category" href="/categories/vim/">Vim</a><a class="category" href="/categories/tmux/">Tmux</a></span>
 
-</main>
-<hr />
-<h1>Comments🎉</h1>
 
-<div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="5b549074-8206-4098-983b-d54bb541397a"
-  data-page-id="80a22404b2999fac014e191854d8a85b"
-  data-page-url="https://treeboylife.com/blog/about-tmux-and-vim/"
-  data-page-title="About Tmux and Vim"
-></div>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-  <footer>
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/vim/">Vim</a><a class="tag" href="/tags/tmux/">Tmux</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        LofiCafe
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
   
-  
-  <hr/>
-  © <a href="https://treeboylife.com">Nan Dean</a> 2016 &ndash; 2021
-  
-  </footer>
-  </body>
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></body>
 </html>
-

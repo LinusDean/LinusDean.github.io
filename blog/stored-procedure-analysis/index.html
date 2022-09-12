@@ -1,52 +1,435 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stored Procedure Analysis | Dean&#39;s Blog</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    
-  </head>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    LofiCafe
+        |
+        Stored Procedure Analysis
 
-  <body>
-    <nav>
-    <ul class="menu">
+
       
-      <li><a href="/">Blog</a></li>
+
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.84.4" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="LofiCafe" />
+  <meta
+    name="description"
+    content="Blog about tech and life"
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
+      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://treeboylife.com/blog/stored-procedure-analysis/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Stored Procedure Analysis"/>
+<meta name="twitter:description" content="记录一次存储过程耗时分析 公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中
+在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此
+我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。
+主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg
+DROPTABLEIFEXISTS`debugMsg`;CREATETABLE`debugMsg`(`msg`varchar(255)DEFAULTNULL,`datetime`int(8)DEFAULTNULL)ENGINE=InnoDBDEFAULTCHARSET=utf8;在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
+set@debug_enable=FALSE;IF@debug_enableTHENdeletefromdebugMsg;ENDIF;...IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(&#34;create case xxxxx....&#34;,UNIX_TIMESTAMP());ENDIF;业务代码部分IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(&#34;END create case xxxxx."/>
+
+
+
+  
+  <meta property="og:title" content="Stored Procedure Analysis" />
+<meta property="og:description" content="记录一次存储过程耗时分析 公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中
+在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此
+我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。
+主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg
+DROPTABLEIFEXISTS`debugMsg`;CREATETABLE`debugMsg`(`msg`varchar(255)DEFAULTNULL,`datetime`int(8)DEFAULTNULL)ENGINE=InnoDBDEFAULTCHARSET=utf8;在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试
+set@debug_enable=FALSE;IF@debug_enableTHENdeletefromdebugMsg;ENDIF;...IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(&#34;create case xxxxx....&#34;,UNIX_TIMESTAMP());ENDIF;业务代码部分IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(&#34;END create case xxxxx." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://treeboylife.com/blog/stored-procedure-analysis/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-07-16T20:36:00+08:00" />
+<meta property="article:modified_time" content="2021-07-16T20:36:00+08:00" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "blog",
+        "name": "Stored Procedure Analysis",
+        "headline": "Stored Procedure Analysis",
+        "alternativeHeadline": "",
+        "description": "
       
-      <li><a href="/categories">Categories</a></li>
+        记录一次存储过程耗时分析 公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中\n在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此\n我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。\n主要思路 调试语句的主要思路就是创建一个零时的表例如debugMsg\nDROPTABLEIFEXISTS`debugMsg`;CREATETABLE`debugMsg`(`msg`varchar(255)DEFAULTNULL,`datetime`int(8)DEFAULTNULL)ENGINE=InnoDBDEFAULTCHARSET=utf8;在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试\nset@debug_enable=FALSE;IF@debug_enableTHENdeletefromdebugMsg;ENDIF;...IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(\u0026#34;create case xxxxx....\u0026#34;,UNIX_TIMESTAMP());ENDIF;业务代码部分IF@debug_enableTHENINSERTINTOdebugMsg(msg,datetime)VALUES(\u0026#34;END create case xxxxx.
+
+
       
-      <li><a href="/tags">Tags</a></li>
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/treeboylife.com\/blog\/stored-procedure-analysis\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "LofiCafe"
+        },
+        "copyrightYear" : "2021",
+        "dateCreated": "2021-07-16T20:36:00.00Z",
+        "datePublished": "2021-07-16T20:36:00.00Z",
+        "dateModified": "2021-07-16T20:36:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "LofiCafe",
+            "url": "https://treeboylife.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/treeboylife.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/treeboylife.com\/blog\/stored-procedure-analysis\/",
+        "wordCount" : "13",
+        "genre" : [ 
       
-      <li><a href="/about">About</a></li>
+      "TS"
+
+    
       
-      <li><a href="/blogroll">Blogroll</a></li>
+        ,
+
+      
+      "2021"
+
+    ],
+        "keywords" : [ 
+      
+      "TS"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/"></a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Blog about tech and life</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
       
     </ul>
-    <hr/>
-    </nav>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        LofiCafe
+        2022
 
-<div class="article-meta">
-<h1><span class="title">Stored Procedure Analysis</span></h1>
 
-<h2 class="date">2021/07/16</h2>
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/categories"
+              
+              title=""
+              >Categories</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/tags"
+              
+              title=""
+              >Tags</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/about"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/blogroll"
+              
+              title=""
+              >Blogroll</a
+            >
+          </li>
+
+        
+
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
 </div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
 
-<main>
-<h1 id="记录一次存储过程耗时分析">记录一次存储过程耗时分析</h1>
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Stored Procedure Analysis</h1>
+      <h1 id="记录一次存储过程耗时分析">记录一次存储过程耗时分析</h1>
 <p>公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中<br>
 在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此<br>
 我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。</p>
 <h2 id="主要思路">主要思路</h2>
 <p>调试语句的主要思路就是创建一个零时的表例如debugMsg</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#a2f;font-weight:bold">DROP</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">EXISTS</span><span style="color:#bbb"> </span><span style="color:#666">`</span>debugMsg<span style="color:#666">`</span>;<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#a2f;font-weight:bold">DROP</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">EXISTS</span><span style="color:#bbb"> </span><span style="color:#666">`</span>debugMsg<span style="color:#666">`</span>;<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#666">`</span>debugMsg<span style="color:#666">`</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
 </span><span style="color:#bbb">  </span><span style="color:#666">`</span>msg<span style="color:#666">`</span><span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">255</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
 </span><span style="color:#bbb">  </span><span style="color:#666">`</span>datetime<span style="color:#666">`</span><span style="color:#bbb"> </span><span style="color:#a2f">int</span>(<span style="color:#666">8</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>ENGINE<span style="color:#666">=</span>InnoDB<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span>CHARSET<span style="color:#666">=</span>utf8;<span style="color:#bbb">
 </span></code></pre></div><p>在我们执行特定语句的前后分别加入调试语句，将记录插入到debugMsg表中，已达到获取该段SQL执行时间的粗略时间,并且在存储过程最前加入一个标记位，方便开启关闭调试</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#a2f;font-weight:bold">set</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">FALSE</span>;<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#a2f;font-weight:bold">set</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">FALSE</span>;<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">THEN</span><span style="color:#bbb">
 </span><span style="color:#bbb">	</span><span style="color:#a2f;font-weight:bold">delete</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>debugMsg;<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span>;<span style="color:#bbb">
@@ -62,26 +445,49 @@
 </span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#666">@</span>debug_enable<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">THEN</span><span style="color:#bbb">
 </span><span style="color:#bbb">	</span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>debugMsg(msg,<span style="color:#bbb"> </span>datetime)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#34;END create case xxxxx....&#34;</span>,<span style="color:#bbb"> </span>UNIX_TIMESTAMP());<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span>;<span style="color:#bbb">
-</span></code></pre></div>
-</main>
-<hr />
-<h1>Comments🎉</h1>
+</span></code></pre></div></div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/ts/">TS</a><a class="category" href="/categories/2021/">2021</a></span>
 
-<div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="5b549074-8206-4098-983b-d54bb541397a"
-  data-page-id="a407407a84916891a20bbf4357cd72c2"
-  data-page-url="https://treeboylife.com/blog/stored-procedure-analysis/"
-  data-page-title="Stored Procedure Analysis"
-></div>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-  <footer>
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/ts/">TS</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        LofiCafe
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
   
-  
-  <hr/>
-  © <a href="https://treeboylife.com">Nan Dean</a> 2016 &ndash; 2021
-  
-  </footer>
-  </body>
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></body>
 </html>
-
