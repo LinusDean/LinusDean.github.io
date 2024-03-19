@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Optimizer on Lofi Cafe</title>
-    <link>https://treeboylife.com/categories/optimizer/</link>
+    <link>https://loficafe.github.io/categories/optimizer/</link>
     <description>Recent content in Optimizer on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Mon, 08 Mar 2021 19:33:30 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/optimizer/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Mar 2021 19:33:30 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/categories/optimizer/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ipopt Build</title>
-      <link>https://treeboylife.com/blog/ipopt-build/</link>
+      <link>https://loficafe.github.io/blog/ipopt-build/</link>
       <pubDate>Mon, 08 Mar 2021 19:33:30 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/ipopt-build/</guid>
+      <guid>https://loficafe.github.io/blog/ipopt-build/</guid>
       <description>What is Ipopt Ipopt (Interior Point Optimizer) is an open source software package for large-scale nonlinear optimization. You can find the official documentation HERE.
 How to Buid It The Ipopt relies some dependencies. Make sure install them first.
 LAPACK (Linear Algebra Package) HSL (Harwell Subroutines Library) ThirdParty-HSL Compile And Install LAPACK First we need to download the source code and compile to dynamic shared library.

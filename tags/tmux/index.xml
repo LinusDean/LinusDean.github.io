@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tmux on Lofi Cafe</title>
-    <link>https://treeboylife.com/tags/tmux/</link>
+    <link>https://loficafe.github.io/tags/tmux/</link>
     <description>Recent content in Tmux on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Sun, 15 Aug 2021 19:54:37 +0800</lastBuildDate><atom:link href="https://treeboylife.com/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 19:54:37 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Tmux and Vim</title>
-      <link>https://treeboylife.com/blog/about-tmux-and-vim/</link>
+      <link>https://loficafe.github.io/blog/about-tmux-and-vim/</link>
       <pubDate>Sun, 15 Aug 2021 19:54:37 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/about-tmux-and-vim/</guid>
+      <guid>https://loficafe.github.io/blog/about-tmux-and-vim/</guid>
       <description>记录以下最近使用Tmux的一些设置和Vim的一些小技巧 tmux tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等
 创建一个Session 我们可以使用tmux new session -s mysessionName 来创建一个Session，我在我的环境变量里将其设置了一个aliasalias tnew=&amp;quot;tmux new session -s&amp;quot;,这样子就可以直接使用tnew mysession直接创建一个新的session，不用敲那么多命令
 挂起当前Session 挂起当前的这个session可以使用组合键Ctrl+b D(默认Control键加b然后按大写d)

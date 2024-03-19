@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TS on Lofi Cafe</title>
-    <link>https://treeboylife.com/categories/ts/</link>
+    <link>https://loficafe.github.io/categories/ts/</link>
     <description>Recent content in TS on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Fri, 16 Jul 2021 20:36:00 +0800</lastBuildDate><atom:link href="https://treeboylife.com/categories/ts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Jul 2021 20:36:00 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/categories/ts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Stored Procedure Analysis</title>
-      <link>https://treeboylife.com/blog/stored-procedure-analysis/</link>
+      <link>https://loficafe.github.io/blog/stored-procedure-analysis/</link>
       <pubDate>Fri, 16 Jul 2021 20:36:00 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/stored-procedure-analysis/</guid>
+      <guid>https://loficafe.github.io/blog/stored-procedure-analysis/</guid>
       <description>记录一次存储过程耗时分析 公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中
 在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此
 我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。

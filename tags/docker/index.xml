@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Lofi Cafe</title>
-    <link>https://treeboylife.com/tags/docker/</link>
+    <link>https://loficafe.github.io/tags/docker/</link>
     <description>Recent content in Docker on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Tue, 03 Aug 2021 14:52:27 +0800</lastBuildDate><atom:link href="https://treeboylife.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 14:52:27 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Use Systemd in Docker Container</title>
-      <link>https://treeboylife.com/blog/use-systemd-in-docker-container/</link>
+      <link>https://loficafe.github.io/blog/use-systemd-in-docker-container/</link>
       <pubDate>Tue, 03 Aug 2021 14:52:27 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/use-systemd-in-docker-container/</guid>
+      <guid>https://loficafe.github.io/blog/use-systemd-in-docker-container/</guid>
       <description>Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。
 Solution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile
 FROM centos:7 ENV container docker RUN yum -y install systemd; yum clean all; RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); RUN rm -rf /lib/systemd/system/multi-user.target.wants/; RUN rm -rf /etc/systemd/system/.wants/; RUN rm -rf /lib/systemd/system/local-fs.target.wants/; RUN rm -rf /lib/systemd/system/sockets.target.wants/udev; RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl; RUN rm -rf /lib/systemd/system/basic.target.wants/; RUN rm -rf /lib/systemd/system/anaconda.target.wants/*; VOLUME [ &amp;#34;/sys/fs/cgroup&amp;#34; ] RUN yum -y install gcc RUN yum -y install epel-release RUN yum -y install snapd CMD [&amp;#34;/usr/sbin/init&amp;#34;] 在Docker目录的同级目录下面执行docker build -t dev .</description>

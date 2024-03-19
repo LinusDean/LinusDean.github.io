@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rust on Lofi Cafe</title>
-    <link>https://treeboylife.com/tags/rust/</link>
+    <link>https://loficafe.github.io/tags/rust/</link>
     <description>Recent content in Rust on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Mon, 12 Sep 2022 15:43:34 +0800</lastBuildDate><atom:link href="https://treeboylife.com/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Sep 2022 15:43:34 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>struct and impl in Rust</title>
-      <link>https://treeboylife.com/blog/struct-impl-in-rust/</link>
+      <link>https://loficafe.github.io/blog/struct-impl-in-rust/</link>
       <pubDate>Mon, 12 Sep 2022 15:43:34 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/struct-impl-in-rust/</guid>
+      <guid>https://loficafe.github.io/blog/struct-impl-in-rust/</guid>
       <description>结构体 在Rust语言中，我们可以使用和C/C++一样的关键字struct去声明一个结构体
 结构体声明 假设我们需要声明一个方形解构，可以在Rust中使用以下声明
 struct Rectangle { width: u32, height: u32, } 初始化一个实例 // 不可变实例 let rect1 = Rectangle { width: 30, height: 60, }; // 可变 let mut rect2 = Rectangle { width: 30, height: 60, }; 访问结构体成员 println!(&amp;#34;height: {}, width: {}&amp;#34;, rect1.width, rect1.height); 直接打印结构体 我们不能直接使用**println!**这个宏去打印结构体。需要对结构体进行修改，添加注解，如下
@@ -23,10 +23,10 @@ impl Rectangle { fn area(&amp;amp;self) -&amp;gt; u32 { self.width * self.</desc
     
     <item>
       <title>Onwership in Rust</title>
-      <link>https://treeboylife.com/blog/onwership-in-rust/</link>
+      <link>https://loficafe.github.io/blog/onwership-in-rust/</link>
       <pubDate>Fri, 26 Nov 2021 15:00:51 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/onwership-in-rust/</guid>
+      <guid>https://loficafe.github.io/blog/onwership-in-rust/</guid>
       <description>什么是所有权？ Rust的核心特性就是所有权。
 所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。
 带有垃圾回收机制例如Java、C#，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。 程序员显示地分配和释放内存，例如C/C++语言。 Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。
@@ -37,20 +37,20 @@ The size of a pointer is not fixed. It depends upon different issues like operat
     
     <item>
       <title>Comments in Rust</title>
-      <link>https://treeboylife.com/blog/comments-in-rust/</link>
+      <link>https://loficafe.github.io/blog/comments-in-rust/</link>
       <pubDate>Sat, 24 Jul 2021 20:20:45 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/comments-in-rust/</guid>
+      <guid>https://loficafe.github.io/blog/comments-in-rust/</guid>
       <description>Rust语言中的注释 任何语言都需要注释，Rust语言提供几个不同的注释方式
 普通的注释 // 一些注释 /* 块注释 */ # 下面是文档的注释，可以被parse到HTML的库文档中 /// 生成库文档 //! </description>
     </item>
     
     <item>
       <title>Hello World Rust</title>
-      <link>https://treeboylife.com/blog/hello-world-rust/</link>
+      <link>https://loficafe.github.io/blog/hello-world-rust/</link>
       <pubDate>Sat, 24 Jul 2021 20:09:54 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/hello-world-rust/</guid>
+      <guid>https://loficafe.github.io/blog/hello-world-rust/</guid>
       <description>Hello World Rust 语言中最简单的一个Hello World程序
 fn main() { println!(&amp;#34;Hello Rust!&amp;#34;); } 在Rust中println!是一个宏(Marco)用于输出字符串
 rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</description>

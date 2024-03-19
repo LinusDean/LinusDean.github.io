@@ -2,18 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on Lofi Cafe</title>
-    <link>https://treeboylife.com/blog/</link>
+    <link>https://loficafe.github.io/blog/</link>
     <description>Recent content in Blogs on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Mon, 12 Sep 2022 15:43:34 +0800</lastBuildDate><atom:link href="https://treeboylife.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Oct 2022 22:58:20 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating Self Signed Ssl Certificate for Your Intranet Web Server</title>
+      <link>https://loficafe.github.io/blog/creating-self-signed-ssl-certificate-for-your-intranet-web-server/</link>
+      <pubDate>Tue, 18 Oct 2022 22:58:20 +0800</pubDate>
+      
+      <guid>https://loficafe.github.io/blog/creating-self-signed-ssl-certificate-for-your-intranet-web-server/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>struct and impl in Rust</title>
-      <link>https://treeboylife.com/blog/struct-impl-in-rust/</link>
+      <link>https://loficafe.github.io/blog/struct-impl-in-rust/</link>
       <pubDate>Mon, 12 Sep 2022 15:43:34 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/struct-impl-in-rust/</guid>
+      <guid>https://loficafe.github.io/blog/struct-impl-in-rust/</guid>
       <description>结构体 在Rust语言中，我们可以使用和C/C++一样的关键字struct去声明一个结构体
 结构体声明 假设我们需要声明一个方形解构，可以在Rust中使用以下声明
 struct Rectangle { width: u32, height: u32, } 初始化一个实例 // 不可变实例 let rect1 = Rectangle { width: 30, height: 60, }; // 可变 let mut rect2 = Rectangle { width: 30, height: 60, }; 访问结构体成员 println!(&amp;#34;height: {}, width: {}&amp;#34;, rect1.width, rect1.height); 直接打印结构体 我们不能直接使用**println!**这个宏去打印结构体。需要对结构体进行修改，添加注解，如下
@@ -23,20 +32,20 @@ impl Rectangle { fn area(&amp;amp;self) -&amp;gt; u32 { self.width * self.</desc
     
     <item>
       <title>Leetcode 217</title>
-      <link>https://treeboylife.com/blog/leetcode-217/</link>
+      <link>https://loficafe.github.io/blog/leetcode-217/</link>
       <pubDate>Sun, 10 Jul 2022 15:32:58 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/leetcode-217/</guid>
+      <guid>https://loficafe.github.io/blog/leetcode-217/</guid>
       <description>217. Contains Duplicate 挺简单的一道题目，一开始想用暴力点求解，但是感觉太蠢了，用hash表秒过
 class Solution { public: bool containsDuplicate(vector&amp;lt;int&amp;gt;&amp;amp; nums) { unordered_map&amp;lt;int, int&amp;gt; hashmap; for (int i = 0; i &amp;lt; nums.size(); i++) { unordered_map&amp;lt;int, int&amp;gt;::const_iterator got = hashmap.find(nums[i]); if (got == hashmap.end()) { hashmap.insert({nums[i], i}); continue; } else { return true; } } return false; } }; </description>
     </item>
     
     <item>
       <title>PIMPL More Stable APIs</title>
-      <link>https://treeboylife.com/blog/pimpl-more-stable-apis/</link>
+      <link>https://loficafe.github.io/blog/pimpl-more-stable-apis/</link>
       <pubDate>Sat, 09 Jul 2022 16:11:32 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/pimpl-more-stable-apis/</guid>
+      <guid>https://loficafe.github.io/blog/pimpl-more-stable-apis/</guid>
       <description> Pimpl a.k.a (Pointer to implentation) 是一种现代C++技术，用于隐藏实现，尽量减少耦合，并分离接口。
 为什么使用pimpl？ 在软件开发中，使用Pimpl有一下三点好处
 最小化编译依赖 实现接口和实现的分离 可移植性 Pimpl头文件 #ifndef IMPL_PERSON_H #define IMPL_PERSON_H #include &amp;lt;string&amp;gt; #include &amp;lt;memory&amp;gt; class Person { public: Person(std::string name); ~Person(); std::string GetAttributes(); private: struct pImplPerson; std::unique_ptr&amp;lt;pImplPerson&amp;gt; m_impl; }; #endif // IMPL_PERSON_H Pimpl实现 #include &amp;#34;person.h&amp;#34; #include &amp;lt;iostream&amp;gt; struct Person::pImplPerson { std::string m_name; std::string m_strength; std::string m_speed; }; Person::Person(std::string name) { m_impl = std::make_unique&amp;lt;pImplPerson&amp;gt;(); m_impl-&amp;gt;m_name = name; m_impl-&amp;gt;m_speed = &amp;#34;n/a&amp;#34;; m_impl-&amp;gt;m_strength = &amp;#34;n/a&amp;#34;; } Person::~Person() {} std::string Person::GetAttributes() { std::string retStr = &amp;#34;name: &amp;#34; + m_impl-&amp;gt;m_name + &amp;#34; speed: &amp;#34; + m_impl-&amp;gt;m_speed + &amp;#34; strength: &amp;#34; + m_impl-&amp;gt;m_strength; return retStr; } 参考链接 why-should-the-pimpl-idiom-be-used Pimpl For Compile-Time Encapsulation (Modern C++) </description>
@@ -44,10 +53,10 @@ class Solution { public: bool containsDuplicate(vector&amp;lt;int&amp;gt;&amp;am
     
     <item>
       <title>Onwership in Rust</title>
-      <link>https://treeboylife.com/blog/onwership-in-rust/</link>
+      <link>https://loficafe.github.io/blog/onwership-in-rust/</link>
       <pubDate>Fri, 26 Nov 2021 15:00:51 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/onwership-in-rust/</guid>
+      <guid>https://loficafe.github.io/blog/onwership-in-rust/</guid>
       <description>什么是所有权？ Rust的核心特性就是所有权。
 所有程序在运行时都必须管理他们使用计算机内存的方式。通常的语言存在以下两种情况。
 带有垃圾回收机制例如Java、C#，在程序运行时，垃圾回收器会不断地寻找不再使用的内存。 程序员显示地分配和释放内存，例如C/C++语言。 Rust语言采取了第三种方式，内存通过一个所有权系统来管理，其中包含一组编译器在编译时检查的规则。当程序运行时，所有权特性不会减慢程序的运行速度（因为Rust把内存管理相关的工作提前到编译时）。
@@ -58,10 +67,10 @@ The size of a pointer is not fixed. It depends upon different issues like operat
     
     <item>
       <title>About Tmux and Vim</title>
-      <link>https://treeboylife.com/blog/about-tmux-and-vim/</link>
+      <link>https://loficafe.github.io/blog/about-tmux-and-vim/</link>
       <pubDate>Sun, 15 Aug 2021 19:54:37 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/about-tmux-and-vim/</guid>
+      <guid>https://loficafe.github.io/blog/about-tmux-and-vim/</guid>
       <description>记录以下最近使用Tmux的一些设置和Vim的一些小技巧 tmux tmux是类UNIX操作系统里面一款终端工具，常用来作为终端分屏或者挂起后台进程等
 创建一个Session 我们可以使用tmux new session -s mysessionName 来创建一个Session，我在我的环境变量里将其设置了一个aliasalias tnew=&amp;quot;tmux new session -s&amp;quot;,这样子就可以直接使用tnew mysession直接创建一个新的session，不用敲那么多命令
 挂起当前Session 挂起当前的这个session可以使用组合键Ctrl+b D(默认Control键加b然后按大写d)
@@ -72,10 +81,10 @@ bind h select-pane -L bind j select-pane -D bind k select-pane -U bind l select-
     
     <item>
       <title>Use Systemd in Docker Container</title>
-      <link>https://treeboylife.com/blog/use-systemd-in-docker-container/</link>
+      <link>https://loficafe.github.io/blog/use-systemd-in-docker-container/</link>
       <pubDate>Tue, 03 Aug 2021 14:52:27 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/use-systemd-in-docker-container/</guid>
+      <guid>https://loficafe.github.io/blog/use-systemd-in-docker-container/</guid>
       <description>Use systemd in docker container 公司的代码比较老旧加上使用的gcc版本也比较低，我放弃了在macOS上直接开发，之前在自己搭建的CentOS7虚拟机下面搭建了一个开发环境，其实环境还是很OK的，但是虚拟机有个缺点就是没有那么方便迁移，且比较笨重，于是我想着能不能将开发环境容器化，于是遇到systemd在docker下面的问题，便记录下来。
 Solution 通过不断的Google，我终于成功的在CentOS7的container下面用起了systemd和ccls, 首先我们需要一个下面的Dockerfile
 FROM centos:7 ENV container docker RUN yum -y install systemd; yum clean all; RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in ; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); RUN rm -rf /lib/systemd/system/multi-user.target.wants/; RUN rm -rf /etc/systemd/system/.wants/; RUN rm -rf /lib/systemd/system/local-fs.target.wants/; RUN rm -rf /lib/systemd/system/sockets.target.wants/udev; RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl; RUN rm -rf /lib/systemd/system/basic.target.wants/; RUN rm -rf /lib/systemd/system/anaconda.target.wants/*; VOLUME [ &amp;#34;/sys/fs/cgroup&amp;#34; ] RUN yum -y install gcc RUN yum -y install epel-release RUN yum -y install snapd CMD [&amp;#34;/usr/sbin/init&amp;#34;] 在Docker目录的同级目录下面执行docker build -t dev .</description>
@@ -83,10 +92,10 @@ FROM centos:7 ENV container docker RUN yum -y install systemd; yum clean all; RU
     
     <item>
       <title>Iptables Port Forwarding Settings</title>
-      <link>https://treeboylife.com/blog/iptables-port-forwarding-settings/</link>
+      <link>https://loficafe.github.io/blog/iptables-port-forwarding-settings/</link>
       <pubDate>Mon, 02 Aug 2021 12:35:18 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/iptables-port-forwarding-settings/</guid>
+      <guid>https://loficafe.github.io/blog/iptables-port-forwarding-settings/</guid>
       <description>Linux iptables转发 最近在使用Apsara专有云，但是其安全组策略有一些限制，原本我们需要使用A机器访问C机器，可惜目前A机器因为安全组策略的原因无法正常访问，但凑巧的是目前有一台中转节点B，A可以访问B，B也可以访问C
 于是我想起了之前Linux用iptables做端口转发的，这边简单记录一下
 示意图 目前简单的网络架构是这样子的
@@ -97,20 +106,20 @@ iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 1.1.1
     
     <item>
       <title>Comments in Rust</title>
-      <link>https://treeboylife.com/blog/comments-in-rust/</link>
+      <link>https://loficafe.github.io/blog/comments-in-rust/</link>
       <pubDate>Sat, 24 Jul 2021 20:20:45 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/comments-in-rust/</guid>
+      <guid>https://loficafe.github.io/blog/comments-in-rust/</guid>
       <description>Rust语言中的注释 任何语言都需要注释，Rust语言提供几个不同的注释方式
 普通的注释 // 一些注释 /* 块注释 */ # 下面是文档的注释，可以被parse到HTML的库文档中 /// 生成库文档 //! </description>
     </item>
     
     <item>
       <title>Hello World Rust</title>
-      <link>https://treeboylife.com/blog/hello-world-rust/</link>
+      <link>https://loficafe.github.io/blog/hello-world-rust/</link>
       <pubDate>Sat, 24 Jul 2021 20:09:54 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/hello-world-rust/</guid>
+      <guid>https://loficafe.github.io/blog/hello-world-rust/</guid>
       <description>Hello World Rust 语言中最简单的一个Hello World程序
 fn main() { println!(&amp;#34;Hello Rust!&amp;#34;); } 在Rust中println!是一个宏(Marco)用于输出字符串
 rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc helloworld.rs rustc编译器编译完程序文件后可以生成一个二进制文件</description>
@@ -118,10 +127,10 @@ rust程序文件后缀为 rs 编译一个rust程序，可以使用 rustc hellowo
     
     <item>
       <title>Stored Procedure Analysis</title>
-      <link>https://treeboylife.com/blog/stored-procedure-analysis/</link>
+      <link>https://loficafe.github.io/blog/stored-procedure-analysis/</link>
       <pubDate>Fri, 16 Jul 2021 20:36:00 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/stored-procedure-analysis/</guid>
+      <guid>https://loficafe.github.io/blog/stored-procedure-analysis/</guid>
       <description>记录一次存储过程耗时分析 公司某个项目的web数据库一些表经过了一些调整导致了一个主要核心业务的存储过程变得非常之慢，于是想要从存储过程中
 在一些关键性的地方打印出一些调试信息和时间信息，因为我们使用了RDS，所以没有办法将日志重定向到某个文件，因此
 我搜索了一下互联网，最终从stackoverflow中找到了一些思路，由于忘记保存书签了，没办法发到记录到这片博文中。
@@ -132,20 +141,20 @@ set @debug_enable=FALSE; IF @debug_enable THEN delete from debugMsg; END IF; ...
     
     <item>
       <title>Leetcode_easy_twosum</title>
-      <link>https://treeboylife.com/blog/leetcode_easy_twosum/</link>
+      <link>https://loficafe.github.io/blog/leetcode_easy_twosum/</link>
       <pubDate>Sat, 17 Apr 2021 20:09:44 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/leetcode_easy_twosum/</guid>
+      <guid>https://loficafe.github.io/blog/leetcode_easy_twosum/</guid>
       <description>Two Sum Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 Solution brute-force class Solution { public: vector&amp;lt;int&amp;gt; twoSum(vector&amp;lt;int&amp;gt;&amp;amp; nums, int target) { for(int i=0; i &amp;lt; nums.size(); ++i) { int left = target - nums[i]; for(int j=i+1; j &amp;lt; nums.size(); j++) { if(nums[j] == left) { return {i, j}; } } } return {}; } }; hashmap class Solution { public: vector&amp;lt;int&amp;gt; twoSum(vector&amp;lt;int&amp;gt;&amp;amp; nums, int target) { unordered_map&amp;lt;int, int&amp;gt; indices; for(int i=0; i &amp;lt; nums.</description>
     </item>
     
     <item>
       <title>Ipopt Build</title>
-      <link>https://treeboylife.com/blog/ipopt-build/</link>
+      <link>https://loficafe.github.io/blog/ipopt-build/</link>
       <pubDate>Mon, 08 Mar 2021 19:33:30 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/ipopt-build/</guid>
+      <guid>https://loficafe.github.io/blog/ipopt-build/</guid>
       <description>What is Ipopt Ipopt (Interior Point Optimizer) is an open source software package for large-scale nonlinear optimization. You can find the official documentation HERE.
 How to Buid It The Ipopt relies some dependencies. Make sure install them first.
 LAPACK (Linear Algebra Package) HSL (Harwell Subroutines Library) ThirdParty-HSL Compile And Install LAPACK First we need to download the source code and compile to dynamic shared library.
@@ -154,10 +163,10 @@ wget https//github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz The LAPACK 
     
     <item>
       <title>Virtual Functions in Cpp</title>
-      <link>https://treeboylife.com/blog/virtual-functions-in-cpp/</link>
+      <link>https://loficafe.github.io/blog/virtual-functions-in-cpp/</link>
       <pubDate>Sun, 28 Feb 2021 10:02:46 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/virtual-functions-in-cpp/</guid>
+      <guid>https://loficafe.github.io/blog/virtual-functions-in-cpp/</guid>
       <description>What is virtual function? A virtual function is a member function in the base class that we expect to redefine in derived classes.
 Basically a virtual function is used in the base class in order to ensure that the function is overriden.
 This especially applies to cases where a pointer of base class points to an object of a derived class.
@@ -166,10 +175,10 @@ Here is a basic example which demonstrates how virtual function works.</descript
     
     <item>
       <title>Migrating Blog to Github Pages</title>
-      <link>https://treeboylife.com/blog/migrate-blog-to-github-pages/</link>
+      <link>https://loficafe.github.io/blog/migrate-blog-to-github-pages/</link>
       <pubDate>Fri, 29 Jan 2021 22:30:51 +0800</pubDate>
       
-      <guid>https://treeboylife.com/blog/migrate-blog-to-github-pages/</guid>
+      <guid>https://loficafe.github.io/blog/migrate-blog-to-github-pages/</guid>
       <description></description>
     </item>
     

@@ -15,16 +15,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
 
 
-<link rel="stylesheet" href="https://treeboylife.com/css/colour/gruvbox-dark.css">
-<link rel="stylesheet" href="https://treeboylife.com/css/colour/dark-mode.css">
-<link rel="stylesheet" href="https://treeboylife.com/css/risotto.css">
-<link rel="stylesheet" href="https://treeboylife.com/css/custom.css">
+<link rel="stylesheet" href="https://loficafe.github.io/css/colour/gruvbox-dark.css">
+<link rel="stylesheet" href="https://loficafe.github.io/css/colour/dark-mode.css">
+<link rel="stylesheet" href="https://loficafe.github.io/css/risotto.css">
+<link rel="stylesheet" href="https://loficafe.github.io/css/custom.css">
 </head>
 
     <body>
         <div class="page">
 
-            <header class="page__header"><h1 class="page__logo"><a href="https://treeboylife.com" class="page__logo-inner">Lofi Cafe</a></h1>
+            <header class="page__header"><h1 class="page__logo"><a href="https://loficafe.github.io" class="page__logo-inner">Lofi Cafe</a></h1>
 <nav class="page__nav main-nav">
     <ul>
     
@@ -48,7 +48,7 @@
 于是我想起了之前Linux用iptables做端口转发的，这边简单记录一下</p>
 <h2 id="示意图">示意图</h2>
 <p>目前简单的网络架构是这样子的<br>
-<img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/ip-forwarding-network.png" alt="&amp;ldquo;network&amp;rdquo;">
+<img src="https://raw.githubusercontent.com/cyber-prog0x/cyber-prog0x.github.io/master/assets/ip-forwarding-network.png" alt="&ldquo;network&rdquo;">
 我们首先需要在服务器B上面开启端口转发功能，需要给sysctl.conf写入端口转发配置</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>net.ipv4.ip_forward<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><p>执行sysctl -p使其生效，最后配置iptables</p>
@@ -64,7 +64,7 @@
             <section class="page__aside">
                 <div class="aside__about">
 <div class="aside__about">
-    <img class="about__logo" src="https://treeboylife.com/images/avatar.jpeg" alt="Logo">
+    <img class="about__logo" src="https://loficafe.github.io/images/avatar.jpeg" alt="Logo">
 <h1 class="about__title">Lofi&amp;Cafe</h1>
 <p class="about__description">Blog about tech and life!</p>
 </div>

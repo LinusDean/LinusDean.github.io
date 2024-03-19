@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on Lofi Cafe</title>
-    <link>https://treeboylife.com/series/</link>
+    <link>https://loficafe.github.io/series/</link>
     <description>Recent content in Series on Lofi Cafe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2022 loficafe</copyright><atom:link href="https://treeboylife.com/series/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2022 loficafe</copyright><atom:link href="https://loficafe.github.io/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
