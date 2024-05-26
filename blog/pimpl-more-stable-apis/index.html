@@ -54,49 +54,49 @@
 <li>可移植性</li>
 </ul>
 <h1 id="pimpl头文件">Pimpl头文件</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#ifndef IMPL_PERSON_H
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IMPL_PERSON_H
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;memory&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>  Person(std<span style="color:#f92672">::</span>string name);
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~</span>Person();
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>string GetAttributes();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">pImplPerson</span>;
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>pImplPerson<span style="color:#f92672">&gt;</span> m_impl;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// IMPL_PERSON_H
-</span></span></span></code></pre></div><h1 id="pimpl实现">Pimpl实现</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;person.h&#34;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">::</span>pImplPerson {
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>string m_name;
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>string m_strength;
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>string m_speed;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Person<span style="color:#f92672">::</span>Person(std<span style="color:#f92672">::</span>string name) {
-</span></span><span style="display:flex;"><span>  m_impl <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>pImplPerson<span style="color:#f92672">&gt;</span>();
-</span></span><span style="display:flex;"><span>  m_impl<span style="color:#f92672">-&gt;</span>m_name <span style="color:#f92672">=</span> name;
-</span></span><span style="display:flex;"><span>  m_impl<span style="color:#f92672">-&gt;</span>m_speed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n/a&#34;</span>;
-</span></span><span style="display:flex;"><span>  m_impl<span style="color:#f92672">-&gt;</span>m_strength <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n/a&#34;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Person<span style="color:#f92672">::~</span>Person() {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string Person<span style="color:#f92672">::</span>GetAttributes() {
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>string retStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;name: &#34;</span> <span style="color:#f92672">+</span> m_impl<span style="color:#f92672">-&gt;</span>m_name <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#34; speed: &#34;</span> <span style="color:#f92672">+</span> m_impl<span style="color:#f92672">-&gt;</span>m_speed <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#34; strength: &#34;</span> <span style="color:#f92672">+</span> m_impl<span style="color:#f92672">-&gt;</span>m_strength;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> retStr;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h1 id="参考链接">参考链接</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#ifndef IMPL_PERSON_H
+</span><span style="color:#75715e">#define IMPL_PERSON_H
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;memory&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  Person(std<span style="color:#f92672">::</span>string name);
+  <span style="color:#f92672">~</span>Person();
+  std<span style="color:#f92672">::</span>string GetAttributes();
+
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">pImplPerson</span>;
+  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>pImplPerson<span style="color:#f92672">&gt;</span> m_impl;
+};
+
+<span style="color:#75715e">#endif </span><span style="color:#75715e">// IMPL_PERSON_H
+</span></code></pre></div><h1 id="pimpl实现">Pimpl实现</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;person.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">::</span>pImplPerson {
+  std<span style="color:#f92672">::</span>string m_name;
+  std<span style="color:#f92672">::</span>string m_strength;
+  std<span style="color:#f92672">::</span>string m_speed;
+};
+
+Person<span style="color:#f92672">::</span>Person(std<span style="color:#f92672">::</span>string name) {
+  m_impl <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>pImplPerson<span style="color:#f92672">&gt;</span>();
+  m_impl<span style="color:#f92672">-&gt;</span>m_name <span style="color:#f92672">=</span> name;
+  m_impl<span style="color:#f92672">-&gt;</span>m_speed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n/a&#34;</span>;
+  m_impl<span style="color:#f92672">-&gt;</span>m_strength <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n/a&#34;</span>;
+}
+
+Person<span style="color:#f92672">::~</span>Person() {}
+
+std<span style="color:#f92672">::</span>string Person<span style="color:#f92672">::</span>GetAttributes() {
+  std<span style="color:#f92672">::</span>string retStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;name: &#34;</span> <span style="color:#f92672">+</span> m_impl<span style="color:#f92672">-&gt;</span>m_name <span style="color:#f92672">+</span>
+                       <span style="color:#e6db74">&#34; speed: &#34;</span> <span style="color:#f92672">+</span> m_impl<span style="color:#f92672">-&gt;</span>m_speed <span style="color:#f92672">+</span>
+                       <span style="color:#e6db74">&#34; strength: &#34;</span> <span style="color:#f92672">+</span> m_impl<span style="color:#f92672">-&gt;</span>m_strength;
+  <span style="color:#66d9ef">return</span> retStr;
+}
+</code></pre></div><h1 id="参考链接">参考链接</h1>
 <ul>
 <li><a href="https://stackoverflow.com/questions/60570/why-should-the-pimpl-idiom-be-used">why-should-the-pimpl-idiom-be-used</a></li>
 <li><a href="https://docs.microsoft.com/en-us/cpp/cpp/pimpl-for-compile-time-encapsulation-modern-cpp?view=msvc-170">Pimpl For Compile-Time Encapsulation (Modern C++)</a></li>

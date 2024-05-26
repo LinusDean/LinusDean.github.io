@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2022 loficafe</copyright>
-    <lastBuildDate>Sat, 09 Jul 2022 16:11:32 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 May 2024 13:26:11 +0800</lastBuildDate><atom:link href="https://loficafe.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Function_adapter</title>
+      <link>https://loficafe.github.io/blog/function_adapter/</link>
+      <pubDate>Sun, 26 May 2024 13:26:11 +0800</pubDate>
+      
+      <guid>https://loficafe.github.io/blog/function_adapter/</guid>
+      <description>函数适配器 用下面一个简单的例子来演示一下函数适配器的作用。
+#include &amp;lt;vector&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;functional&amp;gt;#include &amp;lt;iostream&amp;gt; bool is_negative(const int&amp;amp; a, const int&amp;amp; b) { return a &amp;lt; 0; } int main() { std::vector&amp;lt;int&amp;gt; vec = {-1, -2, -3, 4, 5}; auto Mf = std::bind(is_negative, std::placeholders::_1, 0); auto result = count_if(vec.begin(), vec.end(), Mf); std::cout &amp;lt;&amp;lt; result &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; return 0; } 为啥要使用函数适配器 其实要实现上面的功能，我们完全可以写一个类似 bool is_negative(const int&amp;amp; a) 的函数，或者直接使用 lambda 表达式。但是，如果我们需要使用一个更复杂的函数，而且可能我们原有的 code base 或者 操作系统已经自带了一个可用，但是参数不同的函数。我们这个时候就可以使用函数适配器去简化我们的代码。</description>
+    </item>
+    
     <item>
       <title>PIMPL More Stable APIs</title>
       <link>https://loficafe.github.io/blog/pimpl-more-stable-apis/</link>
@@ -15,8 +25,8 @@
       
       <guid>https://loficafe.github.io/blog/pimpl-more-stable-apis/</guid>
       <description> Pimpl a.k.a (Pointer to implentation) 是一种现代C++技术，用于隐藏实现，尽量减少耦合，并分离接口。
-为什么使用pimpl？ 在软件开发中，使用Pimpl有一下三点好处
-最小化编译依赖 实现接口和实现的分离 可移植性 Pimpl头文件 #ifndef IMPL_PERSON_H #define IMPL_PERSON_H #include &amp;lt;string&amp;gt; #include &amp;lt;memory&amp;gt; class Person { public: Person(std::string name); ~Person(); std::string GetAttributes(); private: struct pImplPerson; std::unique_ptr&amp;lt;pImplPerson&amp;gt; m_impl; }; #endif // IMPL_PERSON_H Pimpl实现 #include &amp;#34;person.h&amp;#34; #include &amp;lt;iostream&amp;gt; struct Person::pImplPerson { std::string m_name; std::string m_strength; std::string m_speed; }; Person::Person(std::string name) { m_impl = std::make_unique&amp;lt;pImplPerson&amp;gt;(); m_impl-&amp;gt;m_name = name; m_impl-&amp;gt;m_speed = &amp;#34;n/a&amp;#34;; m_impl-&amp;gt;m_strength = &amp;#34;n/a&amp;#34;; } Person::~Person() {} std::string Person::GetAttributes() { std::string retStr = &amp;#34;name: &amp;#34; + m_impl-&amp;gt;m_name + &amp;#34; speed: &amp;#34; + m_impl-&amp;gt;m_speed + &amp;#34; strength: &amp;#34; + m_impl-&amp;gt;m_strength; return retStr; } 参考链接 why-should-the-pimpl-idiom-be-used Pimpl For Compile-Time Encapsulation (Modern C++) </description>
+ 为什么使用pimpl？ 在软件开发中，使用Pimpl有一下三点好处
+ 最小化编译依赖 实现接口和实现的分离 可移植性  Pimpl头文件 #ifndef IMPL_PERSON_H #define IMPL_PERSON_H #include &amp;lt;string&amp;gt;#include &amp;lt;memory&amp;gt; class Person { public: Person(std::string name); ~Person(); std::string GetAttributes(); private: struct pImplPerson; std::unique_ptr&amp;lt;pImplPerson&amp;gt; m_impl; }; #endif // IMPL_PERSON_H Pimpl实现 #include &amp;#34;person.h&amp;#34;#include &amp;lt;iostream&amp;gt; struct Person::pImplPerson { std::string m_name; std::string m_strength; std::string m_speed; }; Person::Person(std::string name) { m_impl = std::make_unique&amp;lt;pImplPerson&amp;gt;(); m_impl-&amp;gt;m_name = name; m_impl-&amp;gt;m_speed = &amp;#34;n/a&amp;#34;; m_impl-&amp;gt;m_strength = &amp;#34;n/a&amp;#34;; } Person::~Person() {} std::string Person::GetAttributes() { std::string retStr = &amp;#34;name: &amp;#34; + m_impl-&amp;gt;m_name + &amp;#34; speed: &amp;#34; + m_impl-&amp;gt;m_speed + &amp;#34; strength: &amp;#34; + m_impl-&amp;gt;m_strength; return retStr; } 参考链接  why-should-the-pimpl-idiom-be-used Pimpl For Compile-Time Encapsulation (Modern C++)  </description>
     </item>
     
     <item>

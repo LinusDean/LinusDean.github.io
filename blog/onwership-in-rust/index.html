@@ -119,23 +119,23 @@
 </ul>
 <h3 id="变量作用域">变量作用域</h3>
 <p>Scope就是程序中一个项目的有效范围，例如</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// s 不可用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello&#34;</span>;<span style="color:#75715e">// s可用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                  <span style="color:#75715e">// 可以对s进行相关操作
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}<span style="color:#75715e">// s作用域到此结束，s不再可用
-</span></span></span></code></pre></div><h3 id="以复杂的string类型讲所有权">以复杂的String类型讲所有权</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#75715e">// s 不可用
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello&#34;</span>;<span style="color:#75715e">// s可用
+</span><span style="color:#75715e"></span>                  <span style="color:#75715e">// 可以对s进行相关操作
+</span><span style="color:#75715e"></span>}<span style="color:#75715e">// s作用域到此结束，s不再可用
+</span></code></pre></div><h3 id="以复杂的string类型讲所有权">以复杂的String类型讲所有权</h3>
 <p>String类型（存储在堆上的）比基础标量数据类型更复杂，来看看Rust是如何处理它的</p>
 <h4 id="创建string类型的值">创建String类型的值</h4>
 <p>可以使用from函数从字符串字面值创建出String类型，例如<code>let s = String::from(&quot;Hello&quot;);</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>); <span style="color:#75715e">// mut(即mutable)代表 s是可以修改的
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  
-</span></span><span style="display:flex;"><span>  s.push_str(<span style="color:#e6db74">&#34;, World&#34;</span>);
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  println!(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="内存和分配">内存和分配</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>); <span style="color:#75715e">// mut(即mutable)代表 s是可以修改的
+</span><span style="color:#75715e"></span>  
+  s.push_str(<span style="color:#e6db74">&#34;, World&#34;</span>);
+  
+  println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, s);
+}
+</code></pre></div><h4 id="内存和分配">内存和分配</h4>
 <ul>
 <li>字符串字面值，在编译时就知道它的内容了，其文本内容直接被硬编码到最终的可执行文件里，速度快、高效（得益于其不可变性）</li>
 <li>String类型，为了支持可变性，需要在heap上分配内存来保存编译时未知的文本内容
@@ -168,30 +168,30 @@
 <li>一个长度len</li>
 <li>一个容量capacity</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1;
-</span></span><span style="display:flex;"><span>  prinln!(<span style="color:#e6db74">&#34;{}&#34;</span>, s1); <span style="color:#75715e">// 会报错， borrow of moved value: &#39;s1&#39;,
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  									<span style="color:#75715e">// move occurs because `s1` has type &#39;std::string::String&#39;, which does not implement the &#39;Copy&#39; trait
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>为了保证内存的安全，在上面的代码中，当s1移动到s2后，Rust会让s1失效。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
+  <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1;
+  prinln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, s1); <span style="color:#75715e">// 会报错， borrow of moved value: &#39;s1&#39;,
+</span><span style="color:#75715e"></span>  									<span style="color:#75715e">// move occurs because `s1` has type &#39;std::string::String&#39;, which does not implement the &#39;Copy&#39; trait
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>为了保证内存的安全，在上面的代码中，当s1移动到s2后，Rust会让s1失效。</p>
 <p>Rust中一个设计原则： Rust不会自动创建数据的深拷贝。</p>
 <h4 id="变量和数据交互的方式-克隆clone">变量和数据交互的方式： 克隆（Clone）</h4>
 <p>如果真想对heap上面的String数据进行深度拷贝，而不仅仅是stack上的数据，可以使用clone方法。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1.clone();
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  println!(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s1, s2);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>克隆方法相当于是将stack和heap上的数据都完整拷贝了一份，clone这种方法是比较消耗资源的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello&#34;</span>);
+  <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1.clone();
+  
+  println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}, {}&#34;</span>, s1, s2);
+}
+</code></pre></div><p>克隆方法相当于是将stack和heap上的数据都完整拷贝了一份，clone这种方法是比较消耗资源的。</p>
 <h4 id="stack上的数据-复制">Stack上的数据： 复制</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>  println!(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, x, y); <span style="color:#75715e">// x是整型，为标量类型，在编译的时就确定了大小
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>Copy trait,可以用于像整数这样完全存放在stack上面的类型，如果一个类型实现了Copy这个trait，那么旧的变量在赋值后仍然可用，如果一个类型或者该类型的一部分实现了Drop trait，那么Rust不允许让它再去实现Copy trait了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+  <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> x;
+  println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}, {}&#34;</span>, x, y); <span style="color:#75715e">// x是整型，为标量类型，在编译的时就确定了大小
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>Copy trait,可以用于像整数这样完全存放在stack上面的类型，如果一个类型实现了Copy这个trait，那么旧的变量在赋值后仍然可用，如果一个类型或者该类型的一部分实现了Drop trait，那么Rust不允许让它再去实现Copy trait了</p>
 <h4 id="一些拥有copy-trait的类型">一些拥有Copy Trait的类型</h4>
 <ul>
 <li>任何简单标量的组合类型都可以是Copy的</li>
